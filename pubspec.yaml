@@ -1,0 +1,43 @@
+name: fancy_weather
+description: Simple weather app
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.5
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  http: ^0.13.3
+  geolocator: ^7.4.0
+  provider: ^5.0.0
+  flutter_spinkit: ^5.0.0
+  syncfusion_flutter_charts: ^19.2.51
+  syncfusion_flutter_gauges: ^19.2.51
+  shared_preferences: ^2.0.6
+  cached_network_image: ^3.1.0
+  intl: ^0.17.0
+  pull_to_refresh: ^2.0.0
+  awesome_dialog: ^2.1.0
+
+dev_dependencies:
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
