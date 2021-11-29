@@ -1,7 +1,5 @@
 # Forecast
 
-<img width="200" src="https://forecast.robjvan.ca/img/screenies/dark-mode-01.png">
-
 See current and upcoming conditions for your location, available in metric or imperial units.
 
 Get information on active weather alerts in your community, and plan your day knowing just how much sunlight is available with the sunrise and sunset times.
