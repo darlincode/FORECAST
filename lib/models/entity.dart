@@ -1,5 +1,3 @@
-// @dart=2.9
-
 abstract class Entity<T> {
   Entity();
   Entity<T> copyWith();
