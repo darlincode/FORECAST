@@ -1,7 +1,6 @@
-// @dart=2.9
-
 export 'entity.dart';
 export 'loading_status_model.dart';
+export 'connection_status_model.dart';
 export 'location_model.dart';
 export 'air_pressure_unit_model.dart';
 export 'temp_unit_model.dart';
