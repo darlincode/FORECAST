@@ -1,1 +1,1 @@
-enum WindSpeedUnits { kph, mph, knots, mps }
+enum WindSpeedUnits { Kph, Mph, Knots, Mps }

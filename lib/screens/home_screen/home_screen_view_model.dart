@@ -15,7 +15,7 @@ class HomeScreenViewModel {
     // ie - grabWeatherData
 
     return HomeScreenViewModel(
-      isLoading: store.state.loadingStatus == LoadingStatus.loading,
+      isLoading: store.state.loadingStatus == LoadingStatus.Loading,
     );
   }
 }

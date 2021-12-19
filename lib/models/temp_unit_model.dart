@@ -1,1 +1,1 @@
-enum TempUnits { c, f, k }
+enum TempUnits { C, F, K }

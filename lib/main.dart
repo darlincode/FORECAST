@@ -64,6 +64,7 @@ void main() async {
   runApp(ForecastApp(globalStore));
 }
 
+@immutable
 class ForecastApp extends StatelessWidget {
   final Store<GlobalAppState> store;
   ForecastApp(this.store);
@@ -80,7 +81,7 @@ class ForecastApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       home: StoreBuilder<GlobalAppState>(
         onInit: (Store<GlobalAppState> store) {
-          store.dispatch(SetLoadingStatusAction(LoadingStatus.loading));
+          store.dispatch(SetLoadingStatusAction(LoadingStatus.Loading));
 
           print('main.onInit fired');
           Connectivity().checkConnectivity().then(
@@ -88,7 +89,7 @@ class ForecastApp extends StatelessWidget {
               store.dispatch(ConnectivityChangedAction(_initialConnectivity));
               if (_initialConnectivity != ConnectivityResult.none)
                 store.dispatch(
-                    SetConnectionStatusAction(ConnectionStatus.online));
+                    SetConnectionStatusAction(ConnectionStatus.Online));
             },
           );
         },

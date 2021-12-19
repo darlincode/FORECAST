@@ -1,1 +1,1 @@
-enum AirPressureUnits { mbar, kpa, inch }
+enum AirPressureUnits { Mbar, Kpa, Inch }

@@ -1,1 +1,1 @@
-enum ConnectionStatus { offline, online }
+enum ConnectionStatus { Offline, Online }
