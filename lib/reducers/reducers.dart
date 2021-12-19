@@ -5,15 +5,10 @@ GlobalAppState globalAppStateReducer(GlobalAppState state, action) {
     connectionStatus: connectionStatusReducer(state.connectionStatus, action),
     loadingStatus: loadingStatusReducer(state.loadingStatus, action),
     userSettings: userSettingsReducer(state.userSettings, action),
-    currentLocationInfo:
-        currentLocationReducer(state.currentLocationInfo, action),
+    currentLocInfo: currentLocationReducer(state.currentLocInfo, action),
     locations: locationListReducer(state.locations, action),
-    currentConditions:
-        currentConditionsReducer(state.currentConditions, action),
-    hourlyForecast: hourlyForecastReducer(state.hourlyForecast, action),
-    dailyForecast: dailyForecastReducer(state.dailyForecast, action),
-    astrologicalData: astrologicalDataReducer(state.astrologicalData, action),
     activeWeatherAlerts:
         activeWeatherAlertsReducer(state.activeWeatherAlerts, action),
+        weatherData: weatherDataReduer(state.weatherData, action),
   );
 }
