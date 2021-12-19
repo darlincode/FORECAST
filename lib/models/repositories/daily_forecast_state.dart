@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class DailyForecastStateRepository
     extends Entity<DailyForecastStateRepository> {
-  final List<DateTime> dailyDate;
+  final List<DateTime> dailyDates;
   final List<double> dailyHighsC;
   final List<double> dailyHighsF;
   final List<double> dailyHighsK;
@@ -13,15 +13,15 @@ class DailyForecastStateRepository
   final List<double> dailyLowsF;
   final List<double> dailyLowsK;
   final List<double> dailyHumidity;
-  final List<double> dailyPop;
+  final List<double> dailyChanceOfRain;
   final List<bool> dailyWillItRain;
-  final List<String> dailyConditionString;
-  final List<String> dailyConditionIconUrl;
-  final List<int> dailyConditionCode;
-  final List<double> dailyUv;
+  final List<String> dailyConditionStrings;
+  final List<String> dailyConditionIconUrls;
+  final List<int> dailyConditionCodes;
+  final List<double> dailyUV;
 
   DailyForecastStateRepository({
-    @required this.dailyDate,
+    @required this.dailyDates,
     @required this.dailyHighsC,
     @required this.dailyHighsF,
     @required this.dailyHighsK,
@@ -29,18 +29,18 @@ class DailyForecastStateRepository
     @required this.dailyLowsF,
     @required this.dailyLowsK,
     @required this.dailyHumidity,
-    @required this.dailyPop,
+    @required this.dailyChanceOfRain,
     @required this.dailyWillItRain,
-    @required this.dailyConditionString,
-    @required this.dailyConditionIconUrl,
-    @required this.dailyConditionCode,
-    @required this.dailyUv,
+    @required this.dailyConditionStrings,
+    @required this.dailyConditionIconUrls,
+    @required this.dailyConditionCodes,
+    @required this.dailyUV,
   });
 
   @override
   factory DailyForecastStateRepository.createEmpty() =>
       DailyForecastStateRepository(
-        dailyDate: [],
+        dailyDates: [],
         dailyHighsC: [],
         dailyHighsF: [],
         dailyHighsK: [],
@@ -48,19 +48,19 @@ class DailyForecastStateRepository
         dailyLowsF: [],
         dailyLowsK: [],
         dailyHumidity: [],
-        dailyPop: [],
+        dailyChanceOfRain: [],
         dailyWillItRain: [],
-        dailyConditionString: [],
-        dailyConditionIconUrl: [],
-        dailyConditionCode: [],
-        dailyUv: [],
+        dailyConditionStrings: [],
+        dailyConditionIconUrls: [],
+        dailyConditionCodes: [],
+        dailyUV: [],
       );
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is DailyForecastStateRepository &&
-          other.dailyDate == dailyDate &&
+          other.dailyDates == dailyDates &&
           other.dailyHighsC == dailyHighsC &&
           other.dailyHighsF == dailyHighsF &&
           other.dailyHighsK == dailyHighsK &&
@@ -68,16 +68,16 @@ class DailyForecastStateRepository
           other.dailyLowsF == dailyLowsF &&
           other.dailyLowsK == dailyLowsK &&
           other.dailyHumidity == dailyHumidity &&
-          other.dailyPop == dailyPop &&
+          other.dailyChanceOfRain == dailyChanceOfRain &&
           other.dailyWillItRain == dailyWillItRain &&
-          other.dailyConditionString == dailyConditionString &&
-          other.dailyConditionCode == dailyConditionCode &&
-          other.dailyConditionIconUrl == dailyConditionIconUrl &&
-          other.dailyUv == dailyUv;
+          other.dailyConditionStrings == dailyConditionStrings &&
+          other.dailyConditionCodes == dailyConditionCodes &&
+          other.dailyConditionIconUrls == dailyConditionIconUrls &&
+          other.dailyUV == dailyUV;
 
   @override
   int get hashCode =>
-      dailyDate.hashCode ^
+      dailyDates.hashCode ^
       dailyHighsC.hashCode ^
       dailyHighsF.hashCode ^
       dailyHighsK.hashCode ^
@@ -85,16 +85,16 @@ class DailyForecastStateRepository
       dailyLowsF.hashCode ^
       dailyLowsK.hashCode ^
       dailyHumidity.hashCode ^
-      dailyPop.hashCode ^
+      dailyChanceOfRain.hashCode ^
       dailyWillItRain.hashCode ^
-      dailyConditionString.hashCode ^
-      dailyConditionString.hashCode ^
-      dailyConditionString.hashCode ^
-      dailyUv.hashCode;
+      dailyConditionStrings.hashCode ^
+      dailyConditionStrings.hashCode ^
+      dailyConditionStrings.hashCode ^
+      dailyUV.hashCode;
 
   @override
   DailyForecastStateRepository copyWith({
-    List<DateTime> dailyDate,
+    List<DateTime> dailyDates,
     List<double> dailyHighsC,
     List<double> dailyHighsF,
     List<double> dailyHighsK,
@@ -102,15 +102,15 @@ class DailyForecastStateRepository
     List<double> dailyLowsF,
     List<double> dailyLowsK,
     List<double> dailyHumidity,
-    List<double> dailyPop,
+    List<double> dailyChanceOfRain,
     List<bool> dailyWillItRain,
-    List<String> dailyConditionString,
+    List<String> dailyConditionStrings,
     List<String> dailyConditionIconUrl,
     List<int> dailyConditionCode,
     List<double> dailyUv,
   }) =>
       DailyForecastStateRepository(
-        dailyDate: dailyDate ?? this.dailyDate,
+        dailyDates: dailyDates ?? this.dailyDates,
         dailyHighsC: dailyHighsC ?? this.dailyHighsC,
         dailyHighsF: dailyHighsF ?? this.dailyHighsF,
         dailyHighsK: dailyHighsK ?? this.dailyHighsK,
@@ -118,18 +118,19 @@ class DailyForecastStateRepository
         dailyLowsF: dailyLowsF ?? this.dailyLowsF,
         dailyLowsK: dailyLowsK ?? this.dailyLowsK,
         dailyHumidity: dailyHumidity ?? this.dailyHumidity,
-        dailyPop: dailyPop ?? this.dailyPop,
+        dailyChanceOfRain: dailyChanceOfRain ?? this.dailyChanceOfRain,
         dailyWillItRain: dailyWillItRain ?? this.dailyWillItRain,
-        dailyConditionString: dailyConditionString ?? this.dailyConditionString,
-        dailyConditionIconUrl:
-            dailyConditionIconUrl ?? this.dailyConditionIconUrl,
-        dailyConditionCode: dailyConditionCode ?? this.dailyConditionCode,
-        dailyUv: dailyUv ?? this.dailyUv,
+        dailyConditionStrings:
+            dailyConditionStrings ?? this.dailyConditionStrings,
+        dailyConditionIconUrls:
+            dailyConditionIconUrl ?? this.dailyConditionIconUrls,
+        dailyConditionCodes: dailyConditionCode ?? this.dailyConditionCodes,
+        dailyUV: dailyUv ?? this.dailyUV,
       );
 
   @override
   Map<String, dynamic> toJson() => {
-        'dailyDate': dailyDate ?? null,
+        'dailyDates': dailyDates ?? null,
         'dailyHighsC': dailyHighsC ?? null,
         'dailyHighsF': dailyHighsF ?? null,
         'dailyHighsK': dailyHighsK ?? null,
@@ -137,17 +138,17 @@ class DailyForecastStateRepository
         'dailyLowsF': dailyLowsF ?? null,
         'dailyLowsK': dailyLowsK ?? null,
         'dailyHumidity': dailyHumidity ?? null,
-        'dailyPop': dailyPop ?? null,
+        'dailyChanceOfRain': dailyChanceOfRain ?? null,
         'dailyWillItRain': dailyWillItRain ?? null,
-        'dailyConditionString': dailyConditionString ?? null,
-        'dailyConditionIconUrl': dailyConditionIconUrl ?? null,
-        'dailyConditionCode': dailyConditionCode ?? null,
-        'dailyUv': dailyUv ?? null,
+        'dailyConditionStrings': dailyConditionStrings ?? null,
+        'dailyConditionIconUrls': dailyConditionIconUrls ?? null,
+        'dailyConditionCodes': dailyConditionCodes ?? null,
+        'dailyUv': dailyUV ?? null,
       };
 
   @override
   DailyForecastStateRepository.fromJson(json)
-      : dailyDate = List<DateTime>.from(json['dailyDate']) ?? [],
+      : dailyDates = List<DateTime>.from(json['dailyDates']) ?? [],
         dailyHighsC = List<double>.from(json['dailyHighsC']) ?? [],
         dailyHighsF = List<double>.from(json['dailyHighsF']) ?? [],
         dailyHighsK = List<double>.from(json['dailyHighsK']) ?? [],
@@ -155,14 +156,14 @@ class DailyForecastStateRepository
         dailyLowsF = List<double>.from(json['dailyLowsF']) ?? [],
         dailyLowsK = List<double>.from(json['dailyLowsK']) ?? [],
         dailyHumidity = List<double>.from(json['dailyHumidity']) ?? [],
-        dailyPop = List<double>.from(json['dailyPop']) ?? [],
+        dailyChanceOfRain = List<double>.from(json['dailyChanceOfRain']) ?? [],
         dailyWillItRain = List<bool>.from(json['dailyWillItRain']) ?? [],
-        dailyConditionString =
-            List<String>.from(json['dailyConditionString']) ?? [],
-        dailyConditionIconUrl =
-            List<String>.from(json['dailyConditionIconUrl']) ?? [],
-        dailyConditionCode = List<int>.from(json['dailyConditionCode']) ?? [],
-        dailyUv = List<double>.from(json['dailyUv']) ?? [];
+        dailyConditionStrings =
+            List<String>.from(json['dailyConditionStrings']) ?? [],
+        dailyConditionIconUrls =
+            List<String>.from(json['dailyConditionIconUrls']) ?? [],
+        dailyConditionCodes = List<int>.from(json['dailyConditionCodes']) ?? [],
+        dailyUV = List<double>.from(json['dailyUv']) ?? [];
 
   @override
   bool get isNotValid => !isValid;
@@ -176,10 +177,10 @@ class DailyForecastStateRepository
       dailyLowsF != null &&
       dailyLowsK != null &&
       dailyHumidity != null &&
-      dailyPop != null &&
+      dailyChanceOfRain != null &&
       dailyWillItRain != null &&
-      dailyConditionString != null &&
-      dailyConditionIconUrl != null &&
-      dailyConditionCode != null &&
-      dailyUv != null;
+      dailyConditionStrings != null &&
+      dailyConditionIconUrls != null &&
+      dailyConditionCodes != null &&
+      dailyUV != null;
 }
