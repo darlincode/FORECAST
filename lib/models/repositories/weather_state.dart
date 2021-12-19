@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 @immutable
 class WeatherStateRepository extends Entity<WeatherStateRepository> {
   // fields for current conditions
+  final String cityName;
   final DateTime lastUpdated;
   final int lastUpdatedEpoch;
   final double tempC;
@@ -85,6 +86,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
   final List<WeatherAlert> weatherAlerts;
 
   WeatherStateRepository({
+    @required this.cityName,
     @required this.weatherAlerts,
     @required this.lastUpdated,
     @required this.lastUpdatedEpoch,
@@ -155,6 +157,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   factory WeatherStateRepository.createEmpty() => WeatherStateRepository(
+        cityName: 'Error',
         lastUpdated: DateTime.now(),
         lastUpdatedEpoch: DateTime.now().millisecondsSinceEpoch,
         tempC: 0,
@@ -227,6 +230,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is WeatherStateRepository &&
+          other.cityName == cityName &&
           other.lastUpdated == lastUpdated &&
           other.lastUpdatedEpoch == lastUpdatedEpoch &&
           other.tempC == tempC &&
@@ -296,6 +300,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   int get hashCode =>
+      cityName.hashCode ^
       lastUpdated.hashCode ^
       lastUpdatedEpoch.hashCode ^
       tempC.hashCode ^
@@ -365,6 +370,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   WeatherStateRepository copyWith({
+    String cityName,
     DateTime lastUpdated,
     int lastUpdatedEpoch,
     double tempC,
@@ -433,6 +439,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
     String sunset,
   }) =>
       WeatherStateRepository(
+        cityName: cityName ?? this.cityName,
         lastUpdated: lastUpdated ?? this.lastUpdated,
         lastUpdatedEpoch: lastUpdatedEpoch ?? this.lastUpdatedEpoch,
         tempC: tempC ?? this.tempC,
@@ -508,6 +515,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   Map<String, dynamic> toJson() => {
+        'cityName': cityName ?? null,
         'lastUpdated': lastUpdated ?? null,
         'lastUpdatedEpoch': lastUpdatedEpoch ?? null,
         'tempC': tempC ?? null,
@@ -578,7 +586,8 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   WeatherStateRepository.fromJson(json)
-      : lastUpdated =
+      : cityName = json['cityName'] ?? '',
+        lastUpdated =
             Entity.parseJsonDate(json['lastUpdated']) ?? DateTime.now(),
         lastUpdatedEpoch = Entity.parseJsonInt(json['lastUpdatedEpoch']) ?? 0,
         tempC = Entity.parseJsonDouble(json['tempC']) ?? 0,
@@ -662,6 +671,7 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   bool get isValid =>
+      cityName != null &&
       lastUpdated != null &&
       lastUpdatedEpoch != null &&
       tempC != null &&
