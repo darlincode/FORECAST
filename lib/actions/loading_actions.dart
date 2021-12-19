@@ -3,6 +3,6 @@ import 'package:flutter/material.dart';
 
 @immutable
 class SetLoadingStatusAction {
-  final LoadingStatus loadingstatus;
-  SetLoadingStatusAction(this.loadingstatus);
+  final LoadingStatus loadingStatus;
+  SetLoadingStatusAction(this.loadingStatus);
 }
