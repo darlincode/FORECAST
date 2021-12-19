@@ -15,9 +15,9 @@ Middleware<GlobalAppState> handleWeatherDataRequest(WeatherAPI weatherApi) {
 
     // Get the connection status to check if online or not
     // ConnectionStatus connectionStatus = store.state.connectionStatus;
-    bool isOnline = store.state.connectionStatus == ConnectionStatus.online;
+    bool online = store.state.connectionStatus == ConnectionStatus.online;
 
-    if (isOnline) {
+    if (online) {
       APIResponse _response = await weatherApi.getWeatherData(
         lat: _action.lat,
         long: _action.long,
