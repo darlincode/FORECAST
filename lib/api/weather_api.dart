@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fancy_weather/models/models.dart';
 import 'package:fancy_weather/providers/weather_api_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,8 @@ class WeatherAPI {
     try {
       var responseBody = json.decode(response.body);
       if (responseBody != null) {
-        _parsedData = WeatherData.fromJson(jsonDecode(response.body));
+        _parsedData =
+            WeatherStateRepository.fromJson(jsonDecode(response.body));
       }
     } catch (exception) {
       return APIResponse(
