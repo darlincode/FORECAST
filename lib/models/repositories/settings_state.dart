@@ -1,10 +1,9 @@
-// @dart=2.9
-
 import 'package:fancy_weather/models/models.dart';
 import 'package:flutter/material.dart';
 
 /// User settings repository
-class SettingsStateRepository {
+@immutable
+class SettingsStateRepository extends Entity<SettingsStateRepository> {
   final bool useDarkMode;
   final TempUnits tempUnits;
   final WindSpeedUnits windSpeedUnits;
@@ -23,9 +22,9 @@ class SettingsStateRepository {
   factory SettingsStateRepository.createEmpty() => SettingsStateRepository(
         useDarkMode: false,
         useAnimatedBackgrounds: true,
-        tempUnits: TempUnits.c,
-        windSpeedUnits: WindSpeedUnits.kph,
-        airPressureUnits: AirPressureUnits.kpa,
+        tempUnits: TempUnits.C,
+        windSpeedUnits: WindSpeedUnits.Kph,
+        airPressureUnits: AirPressureUnits.Kpa,
       );
 
   @override
@@ -62,5 +61,31 @@ class SettingsStateRepository {
         airPressureUnits: airPressureUnits ?? this.airPressureUnits,
       );
 
-  // TODO: Add toJson and fromJson methods
+  @override
+  bool get isNotValid => !isValid;
+
+  @override
+  bool get isValid =>
+      useDarkMode != null &&
+      useAnimatedBackgrounds != null &&
+      tempUnits != null &&
+      windSpeedUnits != null &&
+      airPressureUnits != null;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'airPressureUnits': airPressureUnits ?? null,
+        'tempUnits': tempUnits ?? null,
+        'windSpeedUnits': windSpeedUnits ?? null,
+        'useDarkMode': useDarkMode ?? null,
+        'useAnimatedBackgrounds': useAnimatedBackgrounds ?? null,
+      };
+
+  @override
+  SettingsStateRepository.fromJson(json)
+      : airPressureUnits = json['airPressureUnits'] ?? AirPressureUnits.Kpa,
+        tempUnits = json['tempUnits'] ?? TempUnits.C,
+        windSpeedUnits = json['windSpeedUnits'] ?? WindSpeedUnits.Kph,
+        useDarkMode = json['useDarkMode'] ?? false,
+        useAnimatedBackgrounds = json['useAnimatedBackgrounds'] ?? true;
 }

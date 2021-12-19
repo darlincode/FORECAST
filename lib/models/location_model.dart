@@ -1,6 +1,8 @@
 import 'package:fancy_weather/models/models.dart';
 import 'package:flutter/material.dart';
 
+
+@immutable
 class Location extends Entity<Location> {
   final String cityName;
   final double latitude;

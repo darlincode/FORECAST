@@ -1,6 +1,8 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:fancy_weather/models/models.dart';
+import 'package:flutter/material.dart';
 
+@immutable
 class ConnectivityChangedAction {
   final ConnectivityResult connectivity;
   ConnectivityChangedAction(this.connectivity);
@@ -11,6 +13,7 @@ class ConnectivityChangedAction {
   }
 }
 
+@immutable
 class SetConnectionStatusAction {
   final ConnectionStatus connectionStatus;
   SetConnectionStatusAction(this.connectionStatus);

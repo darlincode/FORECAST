@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+@immutable
 abstract class Entity<T> {
   Entity();
   Entity<T> copyWith();

@@ -1,6 +1,8 @@
 import 'package:fancy_weather/models/models.dart';
 import 'package:flutter/material.dart';
 
+
+@immutable
 class WeatherAlert extends Entity<WeatherAlert> {
   final bool alertInEffect;
   final String alertHeadline;

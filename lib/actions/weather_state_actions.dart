@@ -1,13 +1,14 @@
-import 'package:fancy_weather/api/api_utils.dart';
+import 'package:fancy_weather/models/models.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class FetchWeatherDataAction {
-  final double lat;
-  final double long;
-  FetchWeatherDataAction({@required this.lat, @required this.long});
+  final Location location;
+  FetchWeatherDataAction(this.location);
 }
 
-class SetWeatherDataAction {
-  final APIResponse response;
-  SetWeatherDataAction(this.response);
+@immutable
+class SetWeatherStateAction {
+  final WeatherStateRepository weatherStateRepository;
+  SetWeatherStateAction(this.weatherStateRepository);
 }

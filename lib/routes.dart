@@ -3,6 +3,7 @@ import 'package:fancy_weather/state.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
+@immutable
 class Routes {
   static const home_screen = '/home';
   static const settings_screen = '/settings';
@@ -18,6 +19,7 @@ class Routes {
   static Map<String, dynamic> buildRoutes(Store<GlobalAppState> store) {
     return {
       Routes.home_screen: (BuildContext context) => HomeScreen(),
+      // TODO: Build screens
       // Routes.settings_screen: (BuildContext context) => SettingsScreen(),
       // Routes.locations_screen: (BuildContext context) => LocationsScreen(),
     };

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+@immutable
 class NavigateBodyAction {
   final String path;
   final String title;

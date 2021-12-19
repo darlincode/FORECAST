@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+@immutable
 class ForecastIcons {
   static const String chevron_down = 'assets/icons/chevron-down.svg';
   static const String chevron_up = 'assets/icons/chevron-up.svg';
