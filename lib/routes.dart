@@ -20,8 +20,8 @@ class Routes {
     return {
       Routes.home_screen: (BuildContext context) => HomeScreen(),
       // TODO: Build screens
-      // Routes.settings_screen: (BuildContext context) => SettingsScreen(),
-      // Routes.locations_screen: (BuildContext context) => LocationsScreen(),
+      Routes.settings_screen: (BuildContext context) => SettingsScreen(),
+      Routes.locations_screen: (BuildContext context) => LocationsScreen(),
     };
   }
 }
