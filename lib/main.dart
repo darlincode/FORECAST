@@ -71,30 +71,34 @@ class ForecastApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'App Title',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Montserrat',
-      ),
-      darkTheme: ThemeData.dark(),
-      home: StoreBuilder<GlobalAppState>(
-        onInit: (Store<GlobalAppState> store) {
-          store.dispatch(SetLoadingStatusAction(LoadingStatus.Loading));
+    return StoreProvider(
+      key: Key('global-store'),
+      store: store,
+      child: MaterialApp(
+        title: 'App Title',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Montserrat',
+        ),
+        darkTheme: ThemeData.dark(),
+        home: StoreBuilder<GlobalAppState>(
+          onInit: (Store<GlobalAppState> store) {
+            store.dispatch(SetLoadingStatusAction(LoadingStatus.Loading));
 
-          print('main.onInit fired');
-          Connectivity().checkConnectivity().then(
-            (ConnectivityResult _initialConnectivity) {
-              store.dispatch(ConnectivityChangedAction(_initialConnectivity));
-              if (_initialConnectivity != ConnectivityResult.none)
-                store.dispatch(
-                    SetConnectionStatusAction(ConnectionStatus.Online));
-            },
-          );
-        },
-        builder: (BuildContext context, Store<GlobalAppState> store) =>
-            HomeScreen(),
+            print('main.onInit fired');
+            Connectivity().checkConnectivity().then(
+              (ConnectivityResult _initialConnectivity) {
+                store.dispatch(ConnectivityChangedAction(_initialConnectivity));
+                if (_initialConnectivity != ConnectivityResult.none)
+                  store.dispatch(
+                      SetConnectionStatusAction(ConnectionStatus.Online));
+              },
+            );
+          },
+          builder: (BuildContext context, Store<GlobalAppState> store) =>
+              HomeScreen(),
+        ),
       ),
     );
   }
