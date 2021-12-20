@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
 class HomeScreenViewModel {
+  final Function(dynamic) dispatch;
   final bool isLoading;
 
   HomeScreenViewModel({
+    @required this.dispatch,
     @required this.isLoading,
   });
 
@@ -15,6 +17,7 @@ class HomeScreenViewModel {
     // ie - grabWeatherData
 
     return HomeScreenViewModel(
+      dispatch: (dynamic action) => store.dispatch(action),
       isLoading: store.state.loadingStatus == LoadingStatus.Loading,
     );
   }
