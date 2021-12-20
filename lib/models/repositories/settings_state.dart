@@ -74,8 +74,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
 
   @override
   Map<String, dynamic> toJson() => {
-        'airPressureUnits': airPressureUnits ?? null,
-        'tempUnits': tempUnits ?? null,
+        'airPressureUnits': this.airPressureUnits.index ?? null,
+        'tempUnits': this.tempUnits.index ?? null,
         'windSpeedUnits': windSpeedUnits ?? null,
         'useDarkMode': useDarkMode ?? null,
         'useAnimatedBackgrounds': useAnimatedBackgrounds ?? null,
@@ -83,9 +83,14 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
 
   @override
   SettingsStateRepository.fromJson(json)
-      : airPressureUnits = json['airPressureUnits'] ?? AirPressureUnits.Kpa,
-        tempUnits = json['tempUnits'] ?? TempUnits.C,
-        windSpeedUnits = json['windSpeedUnits'] ?? WindSpeedUnits.Kph,
+      : airPressureUnits =
+            AirPressureUnits.values.elementAt(json['airPressureUnits']) ??
+                AirPressureUnits.Kpa,
+        tempUnits =
+            TempUnits.values.elementAt(json['tempUnits']) ?? TempUnits.C,
+        windSpeedUnits =
+            WindSpeedUnits.values.elementAt(json['windSpeedUnits']) ??
+                WindSpeedUnits.Kph,
         useDarkMode = json['useDarkMode'] ?? false,
         useAnimatedBackgrounds = json['useAnimatedBackgrounds'] ?? true;
 }
