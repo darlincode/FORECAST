@@ -1,11 +1,10 @@
 import 'package:fancy_weather/models/models.dart';
-import 'package:fancy_weather/models/weather_alert_model.dart';
 import 'package:flutter/material.dart';
 
 @immutable
 class GlobalAppState {
+  final int activeLocation;
   final Location currentLocInfo;
-  final List<WeatherAlert> activeWeatherAlerts;
   final SettingsStateRepository userSettings;
   final List<Location> locations;
   final LoadingStatus loadingStatus;
@@ -14,8 +13,8 @@ class GlobalAppState {
 
   const GlobalAppState({
     this.locations,
+    this.activeLocation,
     this.currentLocInfo,
-    this.activeWeatherAlerts,
     this.loadingStatus,
     this.connectionStatus,
     this.userSettings,
@@ -24,8 +23,8 @@ class GlobalAppState {
 
   GlobalAppState.initialState()
       : weatherData = WeatherStateRepository.createEmpty(),
+       activeLocation = 0,
         currentLocInfo = Location.createEmpty(),
-        activeWeatherAlerts = List.unmodifiable([]),
         userSettings = SettingsStateRepository.createEmpty(),
         locations = List.unmodifiable([]),
         connectionStatus = ConnectionStatus.Online,
@@ -35,9 +34,9 @@ class GlobalAppState {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is GlobalAppState &&
+          other.activeLocation == activeLocation &&
           other.weatherData == weatherData &&
           other.currentLocInfo == currentLocInfo &&
-          other.activeWeatherAlerts == activeWeatherAlerts &&
           other.userSettings == userSettings &&
           other.locations == locations &&
           other.connectionStatus == connectionStatus &&
@@ -45,27 +44,27 @@ class GlobalAppState {
 
   @override
   int get hashCode =>
+      activeLocation.hashCode ^
       weatherData.hashCode ^
       currentLocInfo.hashCode ^
-      activeWeatherAlerts.hashCode ^
       userSettings.hashCode ^
       locations.hashCode ^
       connectionStatus.hashCode ^
       loadingStatus.hashCode;
 
-  GlobalAppState copyWith(
+  GlobalAppState copyWith({
     WeatherStateRepository weatherData,
+    int activeLocation,
     Location currentLocInfo,
-    List<WeatherAlert> activeWeatherAlerts,
     SettingsStateRepository userSettings,
     List<Location> locations,
     LoadingStatus connectionStatus,
     LoadingStatus loadingStatus,
-  ) =>
+  }) =>
       GlobalAppState(
         weatherData: weatherData ?? this.weatherData,
+        activeLocation: activeLocation ?? this.activeLocation,
         currentLocInfo: currentLocInfo ?? this.currentLocInfo,
-        activeWeatherAlerts: activeWeatherAlerts ?? this.activeWeatherAlerts,
         userSettings: userSettings ?? this.userSettings,
         locations: locations ?? this.locations,
         connectionStatus: connectionStatus ?? this.connectionStatus,
@@ -73,23 +72,21 @@ class GlobalAppState {
       );
 
   GlobalAppState.fromJson(Map<String, dynamic> json)
-      : userSettings = json['userSettings'],
-        connectionStatus = json['connectionStatus'],
-        loadingStatus = json['loadingStatus'],
-        currentLocInfo = json['currentLocInfo'],
-        weatherData = json['weatherData'],
-        activeWeatherAlerts = (json['activeWeatherAlerts'] as List)
-            .map((i) => WeatherAlert.fromJson(i))
-            .toList(),
+      : userSettings = SettingsStateRepository.fromJson(json['userSettings']),
+        activeLocation = Entity.parseJsonInt(json['activeLocation']),
+        connectionStatus = ConnectionStatus.Online,
+        loadingStatus = LoadingStatus.Idle,
+        currentLocInfo = Location.fromJson(json['currentLocInfo']),
+        weatherData = WeatherStateRepository.fromJson(json['weatherData']),
         locations = (json['locations'] as List)
             .map((i) => Location.fromJson(i))
             .toList();
 
   Map<String, dynamic> toJson() => {
         'userSettings': userSettings,
+        'activeLocation': activeLocation,
         'weatherData': weatherData,
         'currentLocInfo': currentLocInfo,
-        'activeWeatherAlerts': activeWeatherAlerts,
         'locations': locations,
       };
 }
