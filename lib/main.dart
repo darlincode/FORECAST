@@ -1,9 +1,7 @@
-import 'package:connectivity/connectivity.dart';
-import 'package:fancy_weather/actions/actions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fancy_weather/api/apis.dart';
 import 'package:fancy_weather/init.dart';
 import 'package:fancy_weather/middleware/middleware.dart';
-import 'package:fancy_weather/models/models.dart';
 import 'package:fancy_weather/providers/providers.dart';
 import 'package:fancy_weather/reducers/reducers.dart';
 import 'package:fancy_weather/screens/screens.dart';
@@ -35,6 +33,7 @@ final WeatherAPI weatherApi = WeatherAPI(weatherApiProvider);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   // == UNCOMMENT THIS TO ENABLE ROOT DETECTION ==
   // if (await isRooted()) {
@@ -61,7 +60,16 @@ void main() async {
     middleware: globalAppStateMiddleware,
   );
 
-  runApp(ForecastApp(globalStore));
+  runApp(EasyLocalization(
+      supportedLocales: [
+        const Locale('en'),
+        const Locale('fr'),
+        const Locale('es'),
+      ],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      // startLocale: Locale('en'),
+      child: ForecastApp(globalStore)));
 }
 
 @immutable
@@ -69,33 +77,28 @@ class ForecastApp extends StatelessWidget {
   final Store<GlobalAppState> store;
   ForecastApp(this.store);
 
+  // void onInit(store) {
+  //   print('main.onInit fired');
+  // }
+
   @override
   Widget build(BuildContext context) {
     return StoreProvider(
       key: Key('global-store'),
       store: store,
       child: MaterialApp(
-        title: 'App Title',
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        title: 'Forecast',
         theme: ThemeData(
           primarySwatch: Colors.green,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Montserrat',
         ),
-        darkTheme: ThemeData.dark(),
+        // darkTheme: ThemeData.dark(),
         home: StoreBuilder<GlobalAppState>(
-          onInit: (Store<GlobalAppState> store) {
-            store.dispatch(SetLoadingStatusAction(LoadingStatus.Loading));
-
-            print('main.onInit fired');
-            Connectivity().checkConnectivity().then(
-              (ConnectivityResult _initialConnectivity) {
-                store.dispatch(ConnectivityChangedAction(_initialConnectivity));
-                if (_initialConnectivity != ConnectivityResult.none)
-                  store.dispatch(
-                      SetConnectionStatusAction(ConnectionStatus.Online));
-              },
-            );
-          },
+          // onInit: onInit,
           builder: (BuildContext context, Store<GlobalAppState> store) =>
               HomeScreen(),
         ),
