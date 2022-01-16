@@ -3,90 +3,74 @@ import 'package:flutter/material.dart';
 
 @immutable
 class GlobalAppState {
-  final int activeLocation;
-  final Location currentLocInfo;
-  final SettingsStateRepository userSettings;
-  final List<Location> locations;
-  final LoadingStatus loadingStatus;
-  final ConnectionStatus connectionStatus;
-  final WeatherStateRepository weatherData;
+  final int activeLocationIndex; // index of currently viewed location
+  final List<SimpleLocation> locationList; // list of SimpleLocations
+  final List<WeatherStateRepository>
+      weatherDataList; // list of WeatherStateRepository
+  final SettingsStateRepository userSettings; // user settings
+  final LoadingStatus loadingStatus; // api loading status
 
-  const GlobalAppState({
-    this.locations,
-    this.activeLocation,
-    this.currentLocInfo,
-    this.loadingStatus,
-    this.connectionStatus,
-    this.userSettings,
-    this.weatherData,
+  GlobalAppState({
+    @required this.weatherDataList,
+    @required this.locationList,
+    @required this.activeLocationIndex,
+    @required this.loadingStatus,
+    @required this.userSettings,
   });
 
   GlobalAppState.initialState()
-      : weatherData = WeatherStateRepository.createEmpty(),
-       activeLocation = 0,
-        currentLocInfo = Location.createEmpty(),
+      : activeLocationIndex = 0,
         userSettings = SettingsStateRepository.createEmpty(),
-        locations = List.unmodifiable([]),
-        connectionStatus = ConnectionStatus.Online,
-        loadingStatus = LoadingStatus.Idle;
+        weatherDataList = List.unmodifiable([]),
+        locationList = List.unmodifiable([]),
+        loadingStatus = LoadingStatus.Loading;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is GlobalAppState &&
-          other.activeLocation == activeLocation &&
-          other.weatherData == weatherData &&
-          other.currentLocInfo == currentLocInfo &&
+          other.activeLocationIndex == activeLocationIndex &&
           other.userSettings == userSettings &&
-          other.locations == locations &&
-          other.connectionStatus == connectionStatus &&
+          other.weatherDataList == weatherDataList &&
+          other.locationList == locationList &&
           other.loadingStatus == loadingStatus;
 
   @override
   int get hashCode =>
-      activeLocation.hashCode ^
-      weatherData.hashCode ^
-      currentLocInfo.hashCode ^
+      activeLocationIndex.hashCode ^
       userSettings.hashCode ^
-      locations.hashCode ^
-      connectionStatus.hashCode ^
+      weatherDataList.hashCode ^
+      locationList.hashCode ^
       loadingStatus.hashCode;
 
   GlobalAppState copyWith({
     WeatherStateRepository weatherData,
-    int activeLocation,
-    Location currentLocInfo,
+    int activeLocationIndex,
     SettingsStateRepository userSettings,
-    List<Location> locations,
-    LoadingStatus connectionStatus,
+    List<WeatherStateRepository> weatherDataList,
+    List<SimpleLocation> locationList,
     LoadingStatus loadingStatus,
   }) =>
       GlobalAppState(
-        weatherData: weatherData ?? this.weatherData,
-        activeLocation: activeLocation ?? this.activeLocation,
-        currentLocInfo: currentLocInfo ?? this.currentLocInfo,
+        activeLocationIndex: activeLocationIndex ?? this.activeLocationIndex,
         userSettings: userSettings ?? this.userSettings,
-        locations: locations ?? this.locations,
-        connectionStatus: connectionStatus ?? this.connectionStatus,
+        weatherDataList: weatherDataList ?? this.weatherDataList,
+        locationList: locationList ?? this.locationList,
         loadingStatus: loadingStatus ?? this.loadingStatus,
       );
 
   GlobalAppState.fromJson(Map<String, dynamic> json)
       : userSettings = SettingsStateRepository.fromJson(json['userSettings']),
-        activeLocation = Entity.parseJsonInt(json['activeLocation']),
-        connectionStatus = ConnectionStatus.Online,
+        activeLocationIndex = Entity.parseJsonInt(json['activeLocationIndex']),
         loadingStatus = LoadingStatus.Idle,
-        currentLocInfo = Location.fromJson(json['currentLocInfo']),
-        weatherData = WeatherStateRepository.fromJson(json['weatherData']),
-        locations = (json['locations'] as List)
-            .map((i) => Location.fromJson(i))
+        weatherDataList = List.unmodifiable([]),
+        locationList = (json['locationList'] as List)
+            .map((i) => SimpleLocation.fromJson(i))
             .toList();
 
   Map<String, dynamic> toJson() => {
         'userSettings': userSettings,
-        'activeLocation': activeLocation,
-        'weatherData': weatherData,
-        'currentLocInfo': currentLocInfo,
-        'locations': locations,
+        'activeLocationIndex': activeLocationIndex,
+        'locationList': locationList,
       };
 }
