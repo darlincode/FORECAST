@@ -1,0 +1,15 @@
+{
+    "loading": "Loading...",
+    "refresh": "Refresh",
+    "feels_like": "It feels like",
+
+    "settings": {
+        "enable_backgrounds": "Enable dynamic backgrounds",
+        "disable_backgrounds": "Disable dynamic backgrounds",
+        "enable_dark_mode": "Enable dark theme",
+        "disable_dark_mode": "Disable dark theme"
+    }
+
+
+
+}

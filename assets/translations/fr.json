@@ -1,0 +1,15 @@
+{
+    "loading": "Chargement...",
+    "refresh": "Rafraîchir",
+    "feels_like": "Se sent comme",
+
+    "settings": {
+        "enable_backgrounds": "Activez les arrière-plans dynamiques",
+        "disable_backgrounds": "Désactiver les arrière-plans dynamiques",
+        "enable_dark_mode": "Activer le thème sombre",
+        "disble_dark_mode": "Désactiver le thème sombre"
+    }
+
+
+
+}

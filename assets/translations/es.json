@@ -1,0 +1,15 @@
+{
+    "loading": "Cargando...",
+    "refresh": "Actualizar",
+    "feels_like": "Se siente como",
+
+    "settings": {
+        "enable_backgrounds": "Habilitar fondos dinámicos",
+        "disable_backgrounds": "Desactivar los fondos dinámicos",
+        "enable_dark_mode": "Activar el tema oscuro",
+        "disble_dark_mode": "Desactivar el tema oscuro"
+    }
+
+
+
+}
