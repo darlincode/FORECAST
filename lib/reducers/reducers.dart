@@ -3,14 +3,11 @@ import 'package:fancy_weather/state.dart';
 
 GlobalAppState globalAppStateReducer(GlobalAppState state, action) {
   return GlobalAppState(
-    connectionStatus: connectionStatusReducer(state.connectionStatus, action),
+    activeLocationIndex:
+        activeLocationReducer(state.activeLocationIndex, action),
     loadingStatus: loadingStatusReducer(state.loadingStatus, action),
-    locations: locationListReducer(state.locations, action),
+    locationList: locationListReducer(state.locationList, action),
+    weatherDataList: weatherDataListReducer(state.weatherDataList, action),
     userSettings: settingsStateReducer(state.userSettings, action),
-    currentLocInfo: currentLocationReducer(state.currentLocInfo, action),
-    weatherData: weatherDataReducer(state.weatherData, action),
   );
-
-
-  
 }
