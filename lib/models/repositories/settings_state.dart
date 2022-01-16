@@ -9,6 +9,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   final WindSpeedUnits windSpeedUnits;
   final AirPressureUnits airPressureUnits;
   final bool useAnimatedBackgrounds;
+  final List<SimpleLocation> locationList;
+  // final Locale locale;
 
   SettingsStateRepository({
     @required this.useDarkMode,
@@ -16,6 +18,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
     @required this.tempUnits,
     @required this.windSpeedUnits,
     @required this.airPressureUnits,
+    @required this.locationList,
+    // @required this.locale,
   });
 
   // These are the default settings for a fresh clean SettingsStateRepository
@@ -25,6 +29,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
         tempUnits: TempUnits.C,
         windSpeedUnits: WindSpeedUnits.Kph,
         airPressureUnits: AirPressureUnits.Kpa,
+        locationList: [],
+        // locale: Locale('en'),
       );
 
   @override
@@ -35,6 +41,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
           other.useAnimatedBackgrounds == useAnimatedBackgrounds &&
           other.tempUnits == tempUnits &&
           other.windSpeedUnits == windSpeedUnits &&
+          other.locationList == locationList &&
+          // other.locale == locale &&
           other.airPressureUnits == airPressureUnits;
 
   @override
@@ -43,6 +51,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
       useAnimatedBackgrounds.hashCode ^
       tempUnits.hashCode ^
       windSpeedUnits.hashCode ^
+      locationList.hashCode ^
+      // locale.hashCode ^
       airPressureUnits.hashCode;
 
   SettingsStateRepository copyWith({
@@ -50,6 +60,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
     bool useAnimatedBackgrounds,
     TempUnits tempUnits,
     WindSpeedUnits windSpeedUnits,
+    List<SimpleLocation> locationList,
+    // Locale locale,
     AirPressureUnits airPressureUnits,
   }) =>
       SettingsStateRepository(
@@ -59,6 +71,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
         tempUnits: tempUnits ?? this.tempUnits,
         windSpeedUnits: windSpeedUnits ?? this.windSpeedUnits,
         airPressureUnits: airPressureUnits ?? this.airPressureUnits,
+        locationList: locationList ?? this.locationList,
+        // locale: locale ?? this.locale,
       );
 
   @override
@@ -70,6 +84,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
       useAnimatedBackgrounds != null &&
       tempUnits != null &&
       windSpeedUnits != null &&
+      locationList != null &&
+      // locale != null &&
       airPressureUnits != null;
 
   @override
@@ -78,6 +94,8 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
         'tempUnits': this.tempUnits.index ?? null,
         'windSpeedUnits': windSpeedUnits ?? null,
         'useDarkMode': useDarkMode ?? null,
+        'locationList': locationList ?? null,
+        // 'locale': locale.toLanguageTag() ?? null,
         'useAnimatedBackgrounds': useAnimatedBackgrounds ?? null,
       };
 
@@ -92,5 +110,9 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
             WindSpeedUnits.values.elementAt(json['windSpeedUnits']) ??
                 WindSpeedUnits.Kph,
         useDarkMode = json['useDarkMode'] ?? false,
+        locationList = (json['locationList'] as List)
+            .map((i) => SimpleLocation.fromJson(i))
+            .toList(),
+        // locale = Locale.fromSubtags(languageCode: json['locale']) ?? false,
         useAnimatedBackgrounds = json['useAnimatedBackgrounds'] ?? true;
 }
