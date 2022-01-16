@@ -24,9 +24,11 @@ dependencies:
   redux: ^5.0.0
   flutter_redux: ^0.8.2
   flutter_jailbreak_detection: ^1.8.0
-  connectivity: ^3.0.6
   shared_preferences: ^2.0.11
   flutter_weather_bg: ^2.8.2
+  easy_localization: ^3.0.0
+  geocode: ^1.0.1
+  uuid: ^3.0.5
   
   # provider: ^6.0.1
   # shared_preferences: ^2.0.11
@@ -39,6 +41,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/logo/
+    - assets/translations/
 
   fonts:
     - family: Montserrat
