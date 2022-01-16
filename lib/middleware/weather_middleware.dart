@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:fancy_weather/actions/actions.dart';
 import 'package:fancy_weather/api/api_utils.dart';
 import 'package:fancy_weather/api/apis.dart';
-import 'package:fancy_weather/models/connection_status_model.dart';
 import 'package:fancy_weather/models/models.dart';
 import 'package:fancy_weather/state.dart';
 import 'package:redux/redux.dart';
+import 'package:uuid/uuid.dart';
 
 Middleware<GlobalAppState> handleWeatherDataRequest(WeatherAPI weatherApi) {
   return (Store<GlobalAppState> store, action, NextDispatcher next) async {
@@ -14,53 +12,85 @@ Middleware<GlobalAppState> handleWeatherDataRequest(WeatherAPI weatherApi) {
     store.dispatch(SetLoadingStatusAction(LoadingStatus.Loading));
 
     FetchWeatherDataAction _action = action;
+    APIResponse _response = await weatherApi.getWeatherData(
+      lat: _action.latitude,
+      long: _action.longitude,
+    );
 
-    // Get the connection status to check if online or not
-    // ConnectionStatus connectionStatus = store.state.connectionStatus;
-    bool online = store.state.connectionStatus == ConnectionStatus.Online;
+    // process the response
+    if (_response.isOk) {
+      // we tell the UI the call was a success
+      store.dispatch(SetLoadingStatusAction(LoadingStatus.Success));
 
-    if (online) {
-      APIResponse _response = await weatherApi.getWeatherData(
-        lat: _action.location.latitude,
-        long: _action.location.longitude,
-      );
+      WeatherStateRepository _apiResult = _response.result;
 
-      // process the response
-      if (_response.isOk) {
-        // we tell the UI the call was a success
-        store.dispatch(SetLoadingStatusAction(LoadingStatus.Success));
-
-        // TODO: Remove debugging messages
-        print(
-            '_response.result.location[\'name\'] = ${_response.result.location['name']}');
-
-        WeatherStateRepository _processedData = WeatherStateRepository(
-            // TODO: Add missing fields
-            );
-
-        // send the data to the reducer
-        // store.dispatch(SetWeatherStateAction(_processedData));
-        // TODO: DELETE THE FOLLOWING TESTING LINES ========================
-        var _rng = new Random();
-        bool _isNegativeThisTime = _rng.nextInt(2) > 0;
-        double _nextTemp = _isNegativeThisTime
-            ? (_rng.nextInt(25) * -1).toDouble()
-            : _rng.nextInt(25).toDouble();
-
-        store.dispatch(
-          SetWeatherStateAction(
-            WeatherStateRepository.createEmpty().copyWith(tempC: _nextTemp),
+      WeatherStateRepository _weatherData =
+          WeatherStateRepository.createEmpty().copyWith(
+        location: APILocation.createEmpty().copyWith(
+          name: _apiResult.location.name,
+          country: _apiResult.location.country,
+          lat: _apiResult.location.lat,
+          long: _apiResult.location.long,
+          localtime: _apiResult.location.localtime,
+          localtime_epoch: _apiResult.location.localtime_epoch,
+          region: _apiResult.location.region,
+          tz_id: _apiResult.location.tz_id,
+        ),
+        currentConditions: APICurrentConditions.createEmpty().copyWith(
+          condition: APICondition.createEmpty().copyWith(
+            code: _apiResult.currentConditions.condition.code,
+            icon: _apiResult.currentConditions.condition.icon,
+            text: _apiResult.currentConditions.condition.text,
           ),
-        );
-        // =================================================================
-      } else {
-        print('There was a problem fetching weather data ${_response.message}');
-        store.dispatch(SetLoadingStatusAction(LoadingStatus.Success));
-        store.dispatch(
-            SetWeatherStateAction(WeatherStateRepository.createEmpty()));
-      }
+          temp_c: _apiResult.currentConditions.temp_c,
+          temp_f: _apiResult.currentConditions.temp_f,
+          feelslike_c: _apiResult.currentConditions.feelslike_c,
+          feelslike_f: _apiResult.currentConditions.feelslike_f,
+          air_quality: APIAQI.createEmpty().copyWith(
+                co: _apiResult.currentConditions.air_quality.co,
+                no2: _apiResult.currentConditions.air_quality.no2,
+                so2: _apiResult.currentConditions.air_quality.so2,
+                o3: _apiResult.currentConditions.air_quality.o3,
+                pm2_5: _apiResult.currentConditions.air_quality.pm2_5,
+                pm10: _apiResult.currentConditions.air_quality.pm10,
+                us_epa_index:
+                    _apiResult.currentConditions.air_quality.us_epa_index,
+                gb_defra_index:
+                    _apiResult.currentConditions.air_quality.gb_defra_index,
+              ),
+          humidity: _apiResult.currentConditions.humidity,
+          is_day: _apiResult.currentConditions.is_day,
+          last_updated: _apiResult.currentConditions.last_updated,
+          last_updated_epoch: _apiResult.currentConditions.last_updated_epoch,
+          pressure_in: _apiResult.currentConditions.pressure_in,
+          pressure_mb: _apiResult.currentConditions.pressure_mb,
+          uv: _apiResult.currentConditions.uv,
+          wind_degree: _apiResult.currentConditions.wind_degree,
+          wind_dir: _apiResult.currentConditions.wind_dir,
+          wind_kph: _apiResult.currentConditions.wind_kph,
+          wind_mph: _apiResult.currentConditions.wind_mph,
+        ),
+        forecast: _apiResult.forecast,
+        weatherAlerts: []..addAll(_apiResult.weatherAlerts),
+      );
+      //   List<dynamic> _locations = store.state.locationList;
+
+      // if (_locations == null) {
+      //   _locations = []..add(_newLocation);
+      // } else {
+      //   _locations
+      //     ..removeAt(_action.index)
+      //     ..insert(_action.index, _newLocation);
+      // }
+
+      //   store.dispatch(SetLocationListAction(_locations));
+      store.dispatch(ReplaceWeatherDataInListAction(
+        index: _action.index,
+        weatherData: _weatherData,
+      ));
     } else {
-      // we are offline
+      print('There was a problem fetching weather data ${_response.message}');
+      store.dispatch(SetLoadingStatusAction(LoadingStatus.Idle));
     }
   };
 }
