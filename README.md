@@ -1,10 +1,18 @@
 # Forecast
 
-See current and upcoming conditions for your location, available in metric or imperial units.
+See current and upcoming conditions for your location.
 
 Get information on active weather alerts in your community, and plan your day knowing just how much sunlight is available with the sunrise and sunset times.
 
 ## Features
+
+- ### Support for multiple languages
+
+Get your weather information in English, French, or Spanish
+
+- ### Support for various units
+
+View your weather information in a variety of units such as celsius, kelvin, knots, m/s, and others
 
 - ### Current Conditions
 
@@ -34,16 +42,17 @@ Switch between light and dark mode to suit your preference
 
 The following packages were used to create this project:
 - flutter_redux
+- redux
 - http
 - geolocator
+- geocode
 - flutter_spinkit
 - syncfusion_flutter_charts
 - syncfusion_flutter_gauges
 - flutter_svg
 - cached_network_image
 - intl
-- pull_to_refresh
+- connectivity
+- shared_preferences
 - flutter_weather_bg
-
-## Credits
-
+- easy_localization
