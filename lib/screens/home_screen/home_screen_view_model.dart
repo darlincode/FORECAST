@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fancy_weather/actions/actions.dart';
 import 'package:fancy_weather/models/models.dart';
 import 'package:fancy_weather/state.dart';
@@ -12,6 +14,7 @@ class HomeScreenViewModel {
   final String tempUnits;
   final String windSpeedUnits;
   final String airPressureUnits;
+
   final String cityName;
   final String conditionsIconUrl;
   final String conditionsString;
@@ -20,6 +23,7 @@ class HomeScreenViewModel {
   final double currentRealfeel;
   final Function(int) weatherType;
   final Function refreshScreen;
+  final bool isActiveWeatherAlerts;
 
   // final int activeLocationIndex;
   // final Function(SimpleLocation) handleAddLocation;
@@ -45,6 +49,7 @@ class HomeScreenViewModel {
     @required this.conditionsCode,
     @required this.weatherType,
     @required this.refreshScreen,
+    @required this.isActiveWeatherAlerts,
     // @required this.activeLocationIndex,
     // @required this.handleAddLocation,
     // @required this.handleRemoveLocation,
@@ -176,16 +181,19 @@ class HomeScreenViewModel {
     double getCurrentTemp() {
       switch (store.state.userSettings.tempUnits) {
         case TempUnits.C:
-          return store.state.weatherDataList[store.state.activeLocationIndex]
-              .currentConditions.temp_c;
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+                  .currentConditions.temp_c ??
+              0;
           break;
         case TempUnits.F:
-          return store.state.weatherDataList[store.state.activeLocationIndex]
-              .currentConditions.temp_f;
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+                  .currentConditions.temp_f ??
+              0;
           break;
         case TempUnits.K:
-          return store.state.weatherDataList[store.state.activeLocationIndex]
-              .currentConditions.temp_k;
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+                  .currentConditions.temp_k ??
+              0;
           break;
       }
       // fallback value, should never be visible
@@ -196,15 +204,18 @@ class HomeScreenViewModel {
       switch (store.state.userSettings.tempUnits ?? TempUnits.C) {
         case TempUnits.C:
           return store.state.weatherDataList[_getActiveLocationIndex()]
-              .currentConditions.feelslike_c;
+                  .currentConditions.feelslike_c ??
+              0;
           break;
         case TempUnits.F:
           return store.state.weatherDataList[_getActiveLocationIndex()]
-              .currentConditions.feelslike_f;
+                  .currentConditions.feelslike_f ??
+              0;
           break;
         case TempUnits.K:
           return store.state.weatherDataList[_getActiveLocationIndex()]
-              .currentConditions.feelslike_k;
+                  .currentConditions.feelslike_k ??
+              0;
           break;
       }
 
@@ -213,6 +224,7 @@ class HomeScreenViewModel {
     }
 
     void _refreshScreen() {
+      log('_refreshScreen fired');
       final int _index = _getActiveLocationIndex();
 
       store.dispatch(
@@ -225,13 +237,15 @@ class HomeScreenViewModel {
     }
 
     return HomeScreenViewModel(
+      isActiveWeatherAlerts: store.state
+          .weatherDataList[_getActiveLocationIndex()].weatherAlerts.isNotEmpty,
       refreshScreen: _refreshScreen,
       cityName:
           store.state.weatherDataList[_getActiveLocationIndex()].location.name,
       conditionsCode: store.state.weatherDataList[_getActiveLocationIndex()]
           .currentConditions.condition.code,
       conditionsIconUrl: store.state.weatherDataList[_getActiveLocationIndex()]
-          .currentConditions.condition?.icon,
+          .currentConditions.condition.icon,
       conditionsString: store.state.weatherDataList[_getActiveLocationIndex()]
           .currentConditions.condition.text,
       currentTemp: getCurrentTemp(),
