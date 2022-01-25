@@ -4,6 +4,7 @@ export 'user_settings_actions.dart';
 export 'weather_list_actions.dart';
 
 import 'package:fancy_weather/models/models.dart';
+import 'package:fancy_weather/state.dart';
 import 'package:flutter/material.dart';
 
 /// Change loading status
@@ -28,4 +29,10 @@ class UpdateWeatherDataReducer {
   String toString() {
     return 'UpdateWeatherDataReducer{weatherData: $weatherData}';
   }
+}
+
+@immutable
+class SetGlobalStateAction {
+  final GlobalAppState state;
+  SetGlobalStateAction(this.state);
 }
