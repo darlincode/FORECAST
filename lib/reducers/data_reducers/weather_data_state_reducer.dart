@@ -1,17 +1,5 @@
 import 'package:fancy_weather/actions/actions.dart';
 import 'package:fancy_weather/models/models.dart';
-// import 'package:redux/redux.dart';
-
-// Reducer<int> activeWeatherDataReducer =
-//     TypedReducer<int, SetActiveWeatherDataIndexAction>(
-//         _setActiveWeatherIndexReducer);
-
-// int _setActiveWeatherIndexReducer(
-//     int index, SetActiveWeatherDataIndexAction action) {
-//   print('DEBUG: _setActiveWeatherIndexReducer fired');
-
-//   return action.index;
-// }
 
 List<WeatherStateRepository> weatherDataListReducer(
     List<WeatherStateRepository> state, action) {
@@ -29,7 +17,18 @@ List<WeatherStateRepository> weatherDataListReducer(
     );
   }
 
+  if (action is ReplaceWeatherDataInListAction) {
+    if (List.from(state).isEmpty) {
+      return List.unmodifiable([action.weatherData]);
+    } else {
+      return List.from(state)
+        ..removeAt(action.index)
+        ..insert(action.index, action.weatherData);
+    }
+  }
+
   if (action is UpdateWeatherDataListAction) {
+    // return List.from(state).
     return action.weatherDataList;
   }
 
