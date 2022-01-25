@@ -31,8 +31,8 @@ class WeatherAPI {
     WeatherStateRepository _parsedData;
 
     try {
-      String responseBody = json.decode(response.body);
-      if (responseBody != null) {
+      // String responseBody = json.decode(response.body);
+      if (response.body != null) {
         _parsedData =
             WeatherStateRepository.fromJson(jsonDecode(response.body));
       }

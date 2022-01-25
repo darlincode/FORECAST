@@ -21,9 +21,9 @@ class GlobalAppState {
   GlobalAppState.initialState()
       : activeLocationIndex = 0,
         userSettings = SettingsStateRepository.createEmpty(),
-        weatherDataList = List.unmodifiable([]),
-        locationList = List.unmodifiable([]),
-        loadingStatus = LoadingStatus.Loading;
+        weatherDataList = [],
+        locationList = [],
+        loadingStatus = LoadingStatus.Idle;
 
   @override
   bool operator ==(Object other) =>
