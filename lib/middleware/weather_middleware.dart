@@ -4,7 +4,6 @@ import 'package:fancy_weather/api/apis.dart';
 import 'package:fancy_weather/models/models.dart';
 import 'package:fancy_weather/state.dart';
 import 'package:redux/redux.dart';
-import 'package:uuid/uuid.dart';
 
 Middleware<GlobalAppState> handleWeatherDataRequest(WeatherAPI weatherApi) {
   return (Store<GlobalAppState> store, action, NextDispatcher next) async {
@@ -73,17 +72,7 @@ Middleware<GlobalAppState> handleWeatherDataRequest(WeatherAPI weatherApi) {
         forecast: _apiResult.forecast,
         weatherAlerts: []..addAll(_apiResult.weatherAlerts),
       );
-      //   List<dynamic> _locations = store.state.locationList;
 
-      // if (_locations == null) {
-      //   _locations = []..add(_newLocation);
-      // } else {
-      //   _locations
-      //     ..removeAt(_action.index)
-      //     ..insert(_action.index, _newLocation);
-      // }
-
-      //   store.dispatch(SetLocationListAction(_locations));
       store.dispatch(ReplaceWeatherDataInListAction(
         index: _action.index,
         weatherData: _weatherData,
