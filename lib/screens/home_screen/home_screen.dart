@@ -23,9 +23,70 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onInit(Store<GlobalAppState> store) {
-    // try {
-    /// Try to load user settings and list of locations from local storage
     store.dispatch(LoadLocalDataAction());
+  }
+
+  Widget _buildRefreshButton(HomeScreenViewModel viewModel) {
+    return IconButton(
+      icon: Icon(Icons.refresh, color: darkGrey.withOpacity(0.6), size: 32),
+      onPressed: () {
+        viewModel.refreshScreen();
+      },
+    );
+  }
+
+  Widget _buildSettingsButton() {
+    return IconButton(
+      icon: Icon(Icons.settings, color: darkGrey.withOpacity(0.6), size: 32),
+      onPressed: () {
+        _scaffoldKey.currentState.openDrawer();
+      },
+    );
+  }
+
+  /// Weather "alert" chip that will show a bottomSheet with details
+  /// about the weather alert
+  Widget _buildWeatherAlertChip(HomeScreenViewModel viewModel) {
+    double _opacity = 0.8;
+    return GestureDetector(
+      onTap: () {},
+      child: Chip(
+        autofocus: false,
+        label: Text(tr('alert')),
+        padding: EdgeInsets.fromLTRB(8, 0, 4, 2),
+        backgroundColor: red.withOpacity(_opacity),
+        labelStyle: TextStyle(
+          color: white,
+          fontWeight: FontWeight.bold,
+        ),
+        avatar: Icon(Icons.warning_amber_rounded, color: white),
+      ),
+    );
+  }
+
+  /// Retrieves the proper bgColor based on device theme
+  Color _getBgColor(viewModel) {
+    return viewModel == null
+        ? Theme.of(context).brightness == Brightness.dark
+            ? bgColorDarkMode
+            : bgColorLightMode
+        : viewModel.useDarkMode
+            ? bgColorDarkMode
+            : bgColorLightMode;
+  }
+
+  /// Build body weather detail panels
+  List<Widget> _buildWeatherDetails(viewModel) {
+    return [
+      SizedBox(height: 48),
+      TemperaturePanel(),
+      // HourlyForecastPanel(),
+      // DailyForecastPanel(),
+      // ConditionsPanel(),
+      // WindConditionsPanel(),
+      // AirQualityPanel(),
+      // AstroDataPanel(),
+    ];
   }
 
   @override
@@ -41,14 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (BuildContext context, HomeScreenViewModel viewModel) {
         return Scaffold(
           key: _scaffoldKey,
-          backgroundColor: viewModel == null
-              ? Theme.of(context).brightness == Brightness.dark
-                  ? bgColorDarkMode
-                  : bgColorLightMode
-              : viewModel.useDarkMode
-                  ? bgColorDarkMode
-                  : bgColorLightMode,
-          endDrawer: FancyEndDrawer(),
+          backgroundColor: _getBgColor(viewModel),
+          drawer: FancyEndDrawer(),
           body: viewModel != null
               ? viewModel.isLoading
                   ? SplashScreen()
@@ -69,35 +124,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: _sw,
                                   height: _sh,
                                   child: Column(
-                                    children: [
-                                      SizedBox(height: 48),
-                                      TemperaturePanel(),
-                                      // HourlyForecastPanel(),
-                                      // DailyForecastPanel(),
-                                      // ConditionsPanel(),
-                                      // WindConditionsPanel(),
-                                      // AirQualityPanel(),
-                                      // AstroDataPanel(),
-                                    ],
+                                    children: _buildWeatherDetails(viewModel),
                                   ),
                                 ),
                               ),
-                              // IconButton(
-                              //   icon: Icon(Icons.settings_outlined),
-                              //   onPressed: () {
-                              //     Navigator.of(context).push(
-                              //       MaterialPageRoute(
-                              //           builder: (ctx) => SettingsScreen()),
-                              //     );
-                              //   },
-                              // ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _buildSettingsButton(),
+                                  if (viewModel.isActiveWeatherAlerts)
+                                    _buildWeatherAlertChip(viewModel),
+                                  _buildRefreshButton(viewModel),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                       ],
                     )
               : SplashScreen(),
-          // ),
         );
       },
     );
@@ -120,6 +166,7 @@ class SplashScreen extends StatelessWidget {
           ),
           SizedBox(height: 32),
           Text(tr('loading')),
+          SizedBox(height: 16),
           SizedBox(
             height: 32,
             width: 32,
