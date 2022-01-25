@@ -25,9 +25,9 @@ class FancyEndDrawer extends StatelessWidget {
                 child: SafeArea(
                   child: Column(
                     children: [
-                      _buildAnimatedBackgroundToggle(viewModel),
-                      _buildDarkModeToggle(viewModel),
-                      _buildRefreshButton(viewModel),
+                      // _buildAnimatedBackgroundToggle(viewModel),
+                      // _buildDarkModeToggle(viewModel),
+                      // _buildRefreshButton(viewModel),
                     ],
                   ),
                 ),

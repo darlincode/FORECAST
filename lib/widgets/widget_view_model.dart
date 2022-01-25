@@ -56,16 +56,18 @@ class WidgetViewModel {
           : 'settings.enable_dark_mode',
       useAnimatedBackgrounds: store.state.userSettings.useAnimatedBackgrounds,
       useDarkMode: store.state.userSettings.useDarkMode,
-      refreshWeatherData: store.dispatch(
-        FetchWeatherDataAction(
-          index: _getActiveIndex(),
-          latitude: store.state.locationList[_getActiveIndex()].latitude,
-          longitude: store.state.locationList[_getActiveIndex()].longitude,
-        ),
-      ),
-      toggleAnimatedBackgrounds:
-          store.dispatch(ToggleAnimatedBackgroundsAction()),
-      toggleDarkMode: store.dispatch(ToggleDarkModeAction()),
+      refreshWeatherData: () {},
+      // store.dispatch(
+      //   FetchWeatherDataAction(
+      //     index: _getActiveIndex(),
+      //     latitude: store.state.locationList[_getActiveIndex()].latitude,
+      //     longitude: store.state.locationList[_getActiveIndex()].longitude,
+      //   ),
+      // ),
+      toggleAnimatedBackgrounds: () {},
+      // store.dispatch(ToggleAnimatedBackgroundsAction()),
+      toggleDarkMode: () {},
+      // store.dispatch(ToggleDarkModeAction()),
     );
   }
 }
