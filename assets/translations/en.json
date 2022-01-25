@@ -2,6 +2,7 @@
     "loading": "Loading...",
     "refresh": "Refresh",
     "feels_like": "It feels like",
+    "alert": "ALERT",
 
     "settings": {
         "enable_backgrounds": "Enable dynamic backgrounds",
