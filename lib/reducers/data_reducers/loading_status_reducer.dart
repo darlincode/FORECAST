@@ -7,7 +7,7 @@ Reducer<LoadingStatus> loadingStatusReducer =
         _setLoadingStatusReducer);
 
 LoadingStatus _setLoadingStatusReducer(
-    LoadingStatus loadingStatus, SetLoadingStatusAction action) {
+    LoadingStatus status, SetLoadingStatusAction action) {
   print('DEBUG: LoadingStatus = ${action.loadingStatus}');
 
   return action.loadingStatus;
