@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 /// Global App theme
 /// Holds colors and styles
 
-const Color textColorLightMode = darkGreyText;
+const Color textColorLightMode = darkGrey;
 const Color textColorDarkMode = white;
 
 const Color bgColorLightMode = white;
-const Color bgColorDarkMode = darkGreyBackground;
+const Color bgColorDarkMode = darkGrey;
 
 const Color cardColorLightMode = Color(0xFFAAAAAA);
 const Color cardColorDarkMode = Color(0xFF000000);
@@ -30,5 +30,4 @@ const Color blue = Color(0xFF0000FF);
 const Color red = Color(0xFFFF0000);
 const Color grey = Color(0xFF808080);
 const Color lightGrey = Color(0xFFDDDDDD);
-const Color darkGreyText = Color(0xFF202020);
-const Color darkGreyBackground = Color(0xFF202020);
+const Color darkGrey = Color(0xFF202020);
