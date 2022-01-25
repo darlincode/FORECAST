@@ -69,16 +69,18 @@ Middleware<GlobalAppState> handleGetCurrentLocationRequest() {
       _userPosition = await Geolocator.getLastKnownPosition();
     }
 
+    log('Current location: ${_userPosition.latitude}, ${_userPosition.longitude}');
+
     // 3. Update current user location (index 0) in locationList
     store.dispatch(ReplaceCoordsInLocationListAction(
-      index: 0,
+      index: store.state.activeLocationIndex,
       latitude: _userPosition.latitude,
       longitude: _userPosition.longitude,
     ));
 
     // 4. Grab weather data using the new location
     store.dispatch(FetchWeatherDataAction(
-      index: 0,
+      index: store.state.activeLocationIndex,
       latitude: _userPosition.latitude,
       longitude: _userPosition.longitude,
     ));
