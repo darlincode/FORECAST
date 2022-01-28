@@ -3,53 +3,33 @@ import 'dart:developer';
 import 'package:fancy_weather/actions/actions.dart';
 import 'package:fancy_weather/models/models.dart';
 import 'package:fancy_weather/state.dart';
+import 'package:fancy_weather/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_bg/flutter_weather_bg.dart';
 import 'package:redux/redux.dart';
 
 class HomeScreenViewModel {
+  final Color textColor;
+  final Color panelColor;
+
   final bool isLoading;
   final bool useDarkMode;
   final bool useAnimatedBackgrounds;
-  final String tempUnits;
-  final String windSpeedUnits;
-  final String airPressureUnits;
-
-  final String cityName;
-  final String conditionsIconUrl;
-  final String conditionsString;
   final int conditionsCode;
-  final double currentTemp;
-  final double currentRealfeel;
   final Function(int) weatherType;
   final Function refreshScreen;
   final bool isActiveWeatherAlerts;
 
-  // final int activeLocationIndex;
-  // final Function(SimpleLocation) handleAddLocation;
-  // final Function(String) handleRemoveLocation;
-  // final Function() handleClearLocations;
-  // final SettingsStateRepository userSettings;
-  // final WeatherStateRepository weatherData;
-  // final double locationLatitude;
-  // final double locationLongitude;
-
   HomeScreenViewModel({
-    @required this.cityName,
     @required this.isLoading,
-    @required this.currentTemp,
-    @required this.currentRealfeel,
-    @required this.tempUnits,
-    @required this.airPressureUnits,
-    @required this.windSpeedUnits,
     @required this.useDarkMode,
     @required this.useAnimatedBackgrounds,
-    @required this.conditionsIconUrl,
-    @required this.conditionsString,
     @required this.conditionsCode,
     @required this.weatherType,
     @required this.refreshScreen,
     @required this.isActiveWeatherAlerts,
+    @required this.textColor,
+    @required this.panelColor,
     // @required this.activeLocationIndex,
     // @required this.handleAddLocation,
     // @required this.handleRemoveLocation,
@@ -63,25 +43,6 @@ class HomeScreenViewModel {
   factory HomeScreenViewModel.create(Store<GlobalAppState> store) {
     /// add methods here
     /// ie - grabWeatherData
-
-    String getUnitsString() {
-      switch (store.state.userSettings.tempUnits) {
-        case TempUnits.C:
-          return 'c';
-          break;
-        case TempUnits.F:
-          return 'f';
-          break;
-        case TempUnits.K:
-          return 'k';
-          break;
-      }
-      return 'c';
-    }
-
-    // TempUnits getUnits() {
-    //   return store.state.userSettings.tempUnits ?? TempUnits.C;
-    // }
 
     WeatherType _weatherType(int code) {
       switch (code) {
@@ -178,51 +139,6 @@ class HomeScreenViewModel {
       // store.dispatch(ClearLocationsAction());
     }
 
-    double getCurrentTemp() {
-      switch (store.state.userSettings.tempUnits) {
-        case TempUnits.C:
-          return store.state.weatherDataList[_getActiveLocationIndex()]
-                  .currentConditions.temp_c ??
-              0;
-          break;
-        case TempUnits.F:
-          return store.state.weatherDataList[_getActiveLocationIndex()]
-                  .currentConditions.temp_f ??
-              0;
-          break;
-        case TempUnits.K:
-          return store.state.weatherDataList[_getActiveLocationIndex()]
-                  .currentConditions.temp_k ??
-              0;
-          break;
-      }
-      // fallback value, should never be visible
-      return 1337.01;
-    }
-
-    double getCurrentRealfeel() {
-      switch (store.state.userSettings.tempUnits ?? TempUnits.C) {
-        case TempUnits.C:
-          return store.state.weatherDataList[_getActiveLocationIndex()]
-                  .currentConditions.feelslike_c ??
-              0;
-          break;
-        case TempUnits.F:
-          return store.state.weatherDataList[_getActiveLocationIndex()]
-                  .currentConditions.feelslike_f ??
-              0;
-          break;
-        case TempUnits.K:
-          return store.state.weatherDataList[_getActiveLocationIndex()]
-                  .currentConditions.feelslike_k ??
-              0;
-          break;
-      }
-
-      /// fallback value, should never be visible
-      return 1337.01;
-    }
-
     void _refreshScreen() {
       log('_refreshScreen fired');
       final int _index = _getActiveLocationIndex();
@@ -237,23 +153,16 @@ class HomeScreenViewModel {
     }
 
     return HomeScreenViewModel(
+      panelColor: store.state.userSettings.useDarkMode
+          ? bgColorDarkMode.withOpacity(0.8)
+          : bgColorLightMode.withOpacity(0.8),
+      textColor: store.state.userSettings.useDarkMode ? white : black,
       isActiveWeatherAlerts: store.state
           .weatherDataList[_getActiveLocationIndex()].weatherAlerts.isNotEmpty,
       refreshScreen: _refreshScreen,
-      cityName:
-          store.state.weatherDataList[_getActiveLocationIndex()].location.name,
       conditionsCode: store.state.weatherDataList[_getActiveLocationIndex()]
           .currentConditions.condition.code,
-      conditionsIconUrl: store.state.weatherDataList[_getActiveLocationIndex()]
-          .currentConditions.condition.icon,
-      conditionsString: store.state.weatherDataList[_getActiveLocationIndex()]
-          .currentConditions.condition.text,
-      currentTemp: getCurrentTemp(),
-      currentRealfeel: getCurrentRealfeel(),
       isLoading: store.state.loadingStatus == LoadingStatus.Loading,
-      tempUnits: getUnitsString(),
-      windSpeedUnits: getUnitsString(),
-      airPressureUnits: getUnitsString(),
       useDarkMode: store.state.userSettings.useDarkMode,
       useAnimatedBackgrounds: store.state.userSettings.useAnimatedBackgrounds,
       weatherType: (code) => _weatherType(code),
