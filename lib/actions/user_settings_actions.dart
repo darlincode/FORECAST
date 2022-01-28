@@ -40,9 +40,9 @@ class ToggleDarkModeAction {}
 //   }
 // }
 
-/// Toggle "Add location mode"
-@immutable
-class ToggleAddLocationModeAction {}
+// /// Toggle "Add location mode"
+// @immutable
+// class ToggleAddLocationModeAction {}
 
 /// Change temperature units
 @immutable

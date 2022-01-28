@@ -30,19 +30,19 @@ Middleware<GlobalAppState> handleToggleDarkModeRequest() {
   });
 }
 
-Middleware<GlobalAppState> handleToggleAddLocationModeRequest() {
-  return TypedMiddleware<GlobalAppState, ToggleAddLocationModeAction>(
-      (Store<GlobalAppState> store, ToggleAddLocationModeAction action,
-          NextDispatcher next) {
-    store.dispatch(
-      UpdateUserSettingsAction(
-        store.state.userSettings.copyWith(
-          isAddLocationMode: !store.state.userSettings.isAddLocationMode,
-        ),
-      ),
-    );
-  });
-}
+// Middleware<GlobalAppState> handleToggleAddLocationModeRequest() {
+//   return TypedMiddleware<GlobalAppState, ToggleAddLocationModeAction>(
+//       (Store<GlobalAppState> store, ToggleAddLocationModeAction action,
+//           NextDispatcher next) {
+//     store.dispatch(
+//       UpdateUserSettingsAction(
+//         store.state.userSettings.copyWith(
+//           isAddLocationMode: !store.state.userSettings.isAddLocationMode,
+//         ),
+//       ),
+//     );
+//   });
+// }
 
 Middleware<GlobalAppState> handleChangeTempUnitRequest() {
   return TypedMiddleware<GlobalAppState, ChangeTempUnitsAction>(

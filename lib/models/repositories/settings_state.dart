@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 @immutable
 class SettingsStateRepository extends Entity<SettingsStateRepository> {
   final bool useDarkMode;
+  // final bool isAddLocationMode;
   final TempUnits tempUnits;
   final WindSpeedUnits windSpeedUnits;
   final AirPressureUnits airPressureUnits;
@@ -14,6 +15,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
 
   SettingsStateRepository({
     @required this.useDarkMode,
+    // @required this.isAddLocationMode,
     @required this.useAnimatedBackgrounds,
     @required this.tempUnits,
     @required this.windSpeedUnits,
@@ -25,6 +27,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   // These are the default settings for a fresh clean SettingsStateRepository
   factory SettingsStateRepository.createEmpty() => SettingsStateRepository(
         useDarkMode: false,
+        // isAddLocationMode: false,
         useAnimatedBackgrounds: true,
         tempUnits: TempUnits.C,
         windSpeedUnits: WindSpeedUnits.Kph,
@@ -38,6 +41,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
       identical(this, other) ||
       other is SettingsStateRepository &&
           other.useDarkMode == useDarkMode &&
+          // other.isAddLocationMode == isAddLocationMode &&
           other.useAnimatedBackgrounds == useAnimatedBackgrounds &&
           other.tempUnits == tempUnits &&
           other.windSpeedUnits == windSpeedUnits &&
@@ -48,6 +52,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   @override
   int get hashCode =>
       useDarkMode.hashCode ^
+      // isAddLocationMode.hashCode ^
       useAnimatedBackgrounds.hashCode ^
       tempUnits.hashCode ^
       windSpeedUnits.hashCode ^
@@ -57,6 +62,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
 
   SettingsStateRepository copyWith({
     bool useDarkMode,
+    // bool isAddLocationMode,
     bool useAnimatedBackgrounds,
     TempUnits tempUnits,
     WindSpeedUnits windSpeedUnits,
@@ -66,6 +72,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   }) =>
       SettingsStateRepository(
         useDarkMode: useDarkMode ?? this.useDarkMode,
+        // isAddLocationMode: isAddLocationMode ?? this.isAddLocationMode,
         useAnimatedBackgrounds:
             useAnimatedBackgrounds ?? this.useAnimatedBackgrounds,
         tempUnits: tempUnits ?? this.tempUnits,
@@ -81,6 +88,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   @override
   bool get isValid =>
       useDarkMode != null &&
+      // isAddLocationMode != null &&
       useAnimatedBackgrounds != null &&
       tempUnits != null &&
       windSpeedUnits != null &&
@@ -94,6 +102,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
         'tempUnits': this.tempUnits.index ?? null,
         'windSpeedUnits': windSpeedUnits ?? null,
         'useDarkMode': useDarkMode ?? null,
+        // 'isAddLocationMode': isAddLocationMode ?? null,
         'locationList': locationList ?? null,
         // 'locale': locale.toLanguageTag() ?? null,
         'useAnimatedBackgrounds': useAnimatedBackgrounds ?? null,
@@ -110,6 +119,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
             WindSpeedUnits.values.elementAt(json['windSpeedUnits']) ??
                 WindSpeedUnits.Kph,
         useDarkMode = json['useDarkMode'] ?? false,
+        // isAddLocationMode = json['isAddLocationMode'] ?? false,
         locationList = (json['locationList'] as List)
             .map((i) => SimpleLocation.fromJson(i))
             .toList(),
