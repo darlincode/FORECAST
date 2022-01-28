@@ -3,12 +3,12 @@
     "refresh": "Refresh",
     "feels_like": "It feels like",
     "alert": "ALERT",
-    "close": "Close",
+    "close": "close settings",
 
     "settings": {
         "settings_header": "User Settings",
-        "enable_backgrounds": "Enable dynamic backgrounds",
-        "enable_dark_mode": "Enable dark theme",
+        "enable_backgrounds": "Dynamic backgrounds",
+        "enable_dark_mode": "Dark theme",
         "language": "Language",
         "en": "English",
         "fr": "French",
@@ -20,7 +20,7 @@
         "temp_units": "Temperature Units",
         "wind_speed_units": "Wind Speed Units",
         "air_pressure_units": "Air Pressure Units",
-        "select_language": "Select language",
+        "select_language": "Language",
         "on": "Enable",
         "off": "Disable"
     },
