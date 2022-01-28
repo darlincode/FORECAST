@@ -20,8 +20,16 @@ List<Middleware<GlobalAppState>> buildGlobalAppStateMiddleware({
         Weather.handleWeatherDataRequest(weatherApi)),
     TypedMiddleware<GlobalAppState, ToggleAnimatedBackgroundsAction>(
         Settings.handleToggleAnimatedBackgroundsRequest()),
+    TypedMiddleware<GlobalAppState, ToggleAddLocationModeAction>(
+        Settings.handleToggleAddLocationModeRequest()),
     TypedMiddleware<GlobalAppState, ToggleDarkModeAction>(
         Settings.handleToggleDarkModeRequest()),
+    TypedMiddleware<GlobalAppState, ChangeTempUnitsAction>(
+        Settings.handleChangeTempUnitRequest()),
+    TypedMiddleware<GlobalAppState, ChangeWindSpeedUnitsAction>(
+        Settings.handleChangeWindSpeedUnitsRequest()),
+    TypedMiddleware<GlobalAppState, ChangeAirPressureUnitsAction>(
+        Settings.handleChangeAirPressureUnitsRequest()),
     TypedMiddleware<GlobalAppState, LoadLocalDataAction>(
         LocalIO.handleLoadLocalDataRequest()),
     TypedMiddleware<GlobalAppState, SaveLocalDataAction>(
