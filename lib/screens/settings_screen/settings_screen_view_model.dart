@@ -17,19 +17,18 @@ class SettingsScreenViewModel {
   final Color textColor;
   final Color drawerColor;
 
-  SettingsScreenViewModel({
-    @required this.refreshWeatherData,
-    @required this.useDarkMode,
-    @required this.useAnimatedBackgrounds,
-    @required this.toggleAnimatedBackgrounds,
-    @required this.toggleDarkMode,
-    @required this.toggleDarkModeBtnText,
-    @required this.toggleAnimBgText,
-    @required this.toggleDarkModeIcon,
-    @required this.toggleAnimBgIcon,
-    @required this.textColor,
-    @required this.drawerColor,
-  });
+  SettingsScreenViewModel(
+      {@required this.refreshWeatherData,
+      @required this.useDarkMode,
+      @required this.useAnimatedBackgrounds,
+      @required this.toggleAnimatedBackgrounds,
+      @required this.toggleDarkMode,
+      @required this.toggleDarkModeBtnText,
+      @required this.toggleAnimBgText,
+      @required this.toggleDarkModeIcon,
+      @required this.toggleAnimBgIcon,
+      @required this.textColor,
+      @required this.drawerColor});
 
   factory SettingsScreenViewModel.create(Store<GlobalAppState> store) {
     _getActiveIndex() {

@@ -11,7 +11,6 @@ import 'package:redux/redux.dart';
 class HomeScreenViewModel {
   final Color textColor;
   final Color panelColor;
-
   final bool isLoading;
   final bool useDarkMode;
   final bool useAnimatedBackgrounds;
@@ -30,37 +29,27 @@ class HomeScreenViewModel {
     @required this.isActiveWeatherAlerts,
     @required this.textColor,
     @required this.panelColor,
-    // @required this.activeLocationIndex,
-    // @required this.handleAddLocation,
-    // @required this.handleRemoveLocation,
-    // @required this.handleClearLocations,
-    // @required this.userSettings,
-    // @required this.weatherData,
-    // @required this.locationLatitude,
-    // @required this.locationLongitude,
   });
 
   factory HomeScreenViewModel.create(Store<GlobalAppState> store) {
-    /// add methods here
-    /// ie - grabWeatherData
+    int _getActiveLocationIndex() {
+      return store.state.activeLocationIndex ?? 0;
+    }
 
     WeatherType _weatherType(int code) {
+      bool _isDay = store.state.weatherDataList[_getActiveLocationIndex()]
+          .currentConditions.is_day;
       switch (code) {
         case 1000:
         case 1003:
-          return DateTime.now().hour < 19
-              ? WeatherType.sunny
-              : WeatherType.sunnyNight;
+          return _isDay ? WeatherType.sunny : WeatherType.sunnyNight;
           break;
         case 1006:
-          return DateTime.now().hour < 19
-              ? WeatherType.cloudy
-              : WeatherType.cloudyNight;
+          return _isDay ? WeatherType.cloudy : WeatherType.cloudyNight;
           break;
         case 1009:
           return WeatherType.overcast;
           break;
-
         case 1030:
         case 1063:
         case 1150:
@@ -123,31 +112,14 @@ class HomeScreenViewModel {
       return null;
     }
 
-    int _getActiveLocationIndex() {
-      return store.state.activeLocationIndex ?? 0;
-    }
-
-    void _handleAddLocation(SimpleLocation location) {
-      // store.dispatch(AddLocationToListAction(location));
-    }
-
-    void _handleRemoveLocation(String id) {
-      // store.dispatch(RemoveLocationFromListAction(id));
-    }
-
-    void _handleClearLocations() {
-      // store.dispatch(ClearLocationsAction());
-    }
-
     void _refreshScreen() {
-      log('_refreshScreen fired');
-      final int _index = _getActiveLocationIndex();
-
       store.dispatch(
         FetchWeatherDataAction(
-          index: _index,
-          latitude: store.state.locationList[_index].latitude,
-          longitude: store.state.locationList[_index].longitude,
+          index: _getActiveLocationIndex(),
+          latitude:
+              store.state.locationList[_getActiveLocationIndex()].latitude,
+          longitude:
+              store.state.locationList[_getActiveLocationIndex()].longitude,
         ),
       );
     }
@@ -166,14 +138,6 @@ class HomeScreenViewModel {
       useDarkMode: store.state.userSettings.useDarkMode,
       useAnimatedBackgrounds: store.state.userSettings.useAnimatedBackgrounds,
       weatherType: (code) => _weatherType(code),
-      // activeLocationIndex: _getActiveLocationIndex(),
-      // handleAddLocation: (location) => _handleAddLocation(location),
-      // handleRemoveLocation: (id) => _handleRemoveLocation(id),
-      // handleClearLocations: () => _handleClearLocations(),
-      // locationLatitude: store.state.locationList[0].latitude,
-      // locationLongitude: store.state.locationList[0].longitude,
-      // userSettings: store.state.userSettings,
-      // weatherData: store.state.weatherDataList[0],
     );
   }
 }
