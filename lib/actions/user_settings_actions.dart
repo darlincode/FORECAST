@@ -1,7 +1,6 @@
 import 'package:fancy_weather/models/models.dart';
 import 'package:flutter/material.dart';
 
-
 /// Reducer for changes in the user settings
 @immutable
 class UpdateUserSettingsAction {
@@ -18,64 +17,65 @@ class UpdateUserSettingsAction {
 @immutable
 class ToggleAnimatedBackgroundsAction {}
 
-/// Reducer for animated backgrounds
-@immutable
-class SetToggleAnimatedBackgroundsAction {
-  final bool useAnimatedBackgrounds;
-  SetToggleAnimatedBackgroundsAction(this.useAnimatedBackgrounds);
-}
+// /// Reducer for animated backgrounds
+// @immutable
+// class SetToggleAnimatedBackgroundsAction {
+//   final bool useAnimatedBackgrounds;
+//   SetToggleAnimatedBackgroundsAction(this.useAnimatedBackgrounds);
+// }
 
 /// Toggle dark theme
 @immutable
 class ToggleDarkModeAction {}
 
-/// Reducer for dark theme
+// /// Reducer for dark theme
+// @immutable
+// class SetToggleDarkModeAction {
+//   final bool useDarkMode;
+//   SetToggleDarkModeAction(this.useDarkMode);
+
+//   @override
+//   String toString() {
+//     return 'SetToggleDarkModeAction{useDarkMode: $useDarkMode}';
+//   }
+// }
+
+/// Toggle "Add location mode"
 @immutable
-class SetToggleDarkModeAction {
-  final bool useDarkMode;
-  SetToggleDarkModeAction(this.useDarkMode);
-
-  @override
-  String toString() {
-    return 'SetToggleDarkModeAction{useDarkMode: $useDarkMode}';
-  }
-}
-
+class ToggleAddLocationModeAction {}
 
 /// Change temperature units
 @immutable
-class SetTempUnitsAction {
+class ChangeTempUnitsAction {
   final TempUnits tempUnits;
-  SetTempUnitsAction(this.tempUnits);
+  ChangeTempUnitsAction(this.tempUnits);
 
   @override
   String toString() {
-    return 'SetTempUnitsAction{tempUnits: $tempUnits}';
+    return 'ChangeTempUnitsAction{tempUnits: $tempUnits}';
   }
 }
-
 
 // Change wind speed units
 @immutable
-class SetWindSpeedUnitsAction {
+class ChangeWindSpeedUnitsAction {
   final WindSpeedUnits windSpeedUnits;
-  SetWindSpeedUnitsAction(this.windSpeedUnits);
+  ChangeWindSpeedUnitsAction(this.windSpeedUnits);
 
   @override
   String toString() {
-    return 'SetWindSpeedUnitsAction{windSpeedUnits: $windSpeedUnits}';
+    return 'ChangeWindSpeedUnitsAction{windSpeedUnits: $windSpeedUnits}';
   }
 }
 
-
 /// Change air pressure units
 @immutable
-class SetAirPressureUnitsAction {
+class ChangeAirPressureUnitsAction {
   final AirPressureUnits airPressureUnits;
-  SetAirPressureUnitsAction(this.airPressureUnits);
+  ChangeAirPressureUnitsAction(this.airPressureUnits);
 
   @override
   String toString() {
-    return 'SetAirPressureUnitsAction{airPressureUnits: $airPressureUnits}';
+    return 'ChangeAirPressureUnitsAction{airPressureUnits: $airPressureUnits}';
   }
 }
