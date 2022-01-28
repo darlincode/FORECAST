@@ -127,7 +127,7 @@ class _FancyDrawerState extends State<FancyDrawer> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Text(
-            tr('settings.enable_dark_mode'),
+            tr('settings.enable_backgrounds'),
             style: TextStyle(color: viewModel.textColor),
           ),
         ),
