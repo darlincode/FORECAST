@@ -18,29 +18,6 @@ SettingsStateRepository _setUserSettingsReducer(
     useAnimatedBackgrounds: action.userSettings.useAnimatedBackgrounds,
     useDarkMode: action.userSettings.useDarkMode,
     windSpeedUnits: action.userSettings.windSpeedUnits,
+    // isAddLocationMode: action.userSettings.isAddLocationMode,
   );
-}
-
-/// Reducer for toggling animated background
-Reducer<SettingsStateRepository> toggleBackgroundReducer =
-    TypedReducer<SettingsStateRepository, SetToggleAnimatedBackgroundsAction>(
-        _setUseAnimatedBackgroundReducer);
-
-SettingsStateRepository _setUseAnimatedBackgroundReducer(
-    SettingsStateRepository settingsState,
-    SetToggleAnimatedBackgroundsAction action) {
-  return settingsState.copyWith(
-      useAnimatedBackgrounds: action.useAnimatedBackgrounds);
-}
-
-/// Reducer for toggling dark theme
-Reducer<SettingsStateRepository> toggleDarkModeReducer =
-    TypedReducer<SettingsStateRepository, SetToggleDarkModeAction>(
-        _setToggleDarkModeReducerReducer);
-
-SettingsStateRepository _setToggleDarkModeReducerReducer(
-    SettingsStateRepository settingsState, SetToggleDarkModeAction action) {
-  return settingsState.copyWith(useDarkMode: action.useDarkMode);
-
-  // return action.useDarkMode;
 }
