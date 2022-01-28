@@ -28,7 +28,6 @@ List<WeatherStateRepository> weatherDataListReducer(
   }
 
   if (action is UpdateWeatherDataListAction) {
-    // return List.from(state).
     return action.weatherDataList;
   }
 

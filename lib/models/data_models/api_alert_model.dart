@@ -17,38 +17,36 @@ class APIAlert extends Entity<APIAlert> {
       desc,
       instruction;
 
-  APIAlert({
-    @required this.headline,
-    @required this.msgtype,
-    @required this.severity,
-    @required this.urgency,
-    @required this.areas,
-    @required this.category,
-    @required this.certainty,
-    @required this.event,
-    @required this.note,
-    @required this.effective,
-    @required this.expires,
-    @required this.desc,
-    @required this.instruction,
-  });
+  APIAlert(
+      {@required this.headline,
+      @required this.msgtype,
+      @required this.severity,
+      @required this.urgency,
+      @required this.areas,
+      @required this.category,
+      @required this.certainty,
+      @required this.event,
+      @required this.note,
+      @required this.effective,
+      @required this.expires,
+      @required this.desc,
+      @required this.instruction});
 
   @override
   factory APIAlert.createEmpty() => APIAlert(
-        areas: null,
-        category: null,
-        certainty: null,
-        desc: null,
-        effective: null,
-        expires: null,
-        event: null,
-        headline: null,
-        instruction: null,
-        msgtype: null,
-        note: null,
-        severity: null,
-        urgency: null,
-      );
+      areas: null,
+      category: null,
+      certainty: null,
+      desc: null,
+      effective: null,
+      expires: null,
+      event: null,
+      headline: null,
+      instruction: null,
+      msgtype: null,
+      note: null,
+      severity: null,
+      urgency: null);
 
   @override
   bool operator ==(Object other) =>
@@ -85,36 +83,34 @@ class APIAlert extends Entity<APIAlert> {
       instruction.hashCode;
 
   @override
-  APIAlert copyWith({
-    String headline,
-    String msgtype,
-    String severity,
-    String urgency,
-    String areas,
-    String category,
-    String certainty,
-    String event,
-    String note,
-    String effective,
-    String expires,
-    String desc,
-    String instruction,
-  }) =>
+  APIAlert copyWith(
+          {String headline,
+          String msgtype,
+          String severity,
+          String urgency,
+          String areas,
+          String category,
+          String certainty,
+          String event,
+          String note,
+          String effective,
+          String expires,
+          String desc,
+          String instruction}) =>
       APIAlert(
-        headline: headline ?? this.headline,
-        msgtype: msgtype ?? this.msgtype,
-        severity: severity ?? this.severity,
-        urgency: urgency ?? this.urgency,
-        areas: areas ?? this.areas,
-        category: category ?? this.category,
-        certainty: certainty ?? this.certainty,
-        event: event ?? this.event,
-        note: note ?? this.note,
-        effective: effective ?? this.effective,
-        expires: expires ?? this.expires,
-        desc: desc ?? this.desc,
-        instruction: instruction ?? this.instruction,
-      );
+          headline: headline ?? this.headline,
+          msgtype: msgtype ?? this.msgtype,
+          severity: severity ?? this.severity,
+          urgency: urgency ?? this.urgency,
+          areas: areas ?? this.areas,
+          category: category ?? this.category,
+          certainty: certainty ?? this.certainty,
+          event: event ?? this.event,
+          note: note ?? this.note,
+          effective: effective ?? this.effective,
+          expires: expires ?? this.expires,
+          desc: desc ?? this.desc,
+          instruction: instruction ?? this.instruction);
 
   @override
   APIAlert.fromJson(Map<String, dynamic> json)
@@ -146,7 +142,7 @@ class APIAlert extends Entity<APIAlert> {
         'effective': effective,
         'expires': expires,
         'desc': desc,
-        'instruction': instruction,
+        'instruction': instruction
       };
 
   @override

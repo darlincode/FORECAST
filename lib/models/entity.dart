@@ -10,9 +10,6 @@ abstract class Entity<T> {
   Map<String, dynamic> toJson();
   Entity.createEmpty();
 
-  // Entity.fromJsonEncrypted(Map<String, dynamic> json, EncryptionKey key);
-  // Map<String, dynamic> toJsonEncrypted(EncryptionKey encryptionKey);
-
   static bool parseJsonBool(dynamic value) {
     if (value is bool) return value;
     if (value is num) return value == 1;

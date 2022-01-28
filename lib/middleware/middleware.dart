@@ -4,8 +4,6 @@ import 'package:fancy_weather/state.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:fancy_weather/middleware/weather_middleware.dart' as Weather;
-// import 'package:fancy_weather/middleware/navigation_middleware.dart'
-//     as Navigation;
 import 'package:fancy_weather/middleware/current_location_middleware.dart'
     as Location;
 import 'package:fancy_weather/middleware/local_io_middleware.dart' as LocalIO;
@@ -20,8 +18,6 @@ List<Middleware<GlobalAppState>> buildGlobalAppStateMiddleware({
         Weather.handleWeatherDataRequest(weatherApi)),
     TypedMiddleware<GlobalAppState, ToggleAnimatedBackgroundsAction>(
         Settings.handleToggleAnimatedBackgroundsRequest()),
-    // TypedMiddleware<GlobalAppState, ToggleAddLocationModeAction>(
-    //     Settings.handleToggleAddLocationModeRequest()),
     TypedMiddleware<GlobalAppState, ToggleDarkModeAction>(
         Settings.handleToggleDarkModeRequest()),
     TypedMiddleware<GlobalAppState, ChangeTempUnitsAction>(
@@ -38,11 +34,3 @@ List<Middleware<GlobalAppState>> buildGlobalAppStateMiddleware({
         Location.handleGetCurrentLocationRequest()),
   ];
 }
-
-// void saveToPrefs(GlobalAppState state) async {
-//   //
-// }
-
-// Future<GlobalAppState> loadFromPrefs(GlobalAppState state) async {
-//   //
-// }

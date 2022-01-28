@@ -6,18 +6,12 @@ class SimpleLocation extends Entity<SimpleLocation> {
   final double latitude, longitude;
   final String id;
 
-  SimpleLocation({
-    @required this.id,
-    @required this.latitude,
-    @required this.longitude,
-  });
+  SimpleLocation(
+      {@required this.id, @required this.latitude, @required this.longitude});
 
   @override
-  factory SimpleLocation.createEmpty() => SimpleLocation(
-        id: Uuid().v4(),
-        latitude: null,
-        longitude: null,
-      );
+  factory SimpleLocation.createEmpty() =>
+      SimpleLocation(id: Uuid().v4(), latitude: null, longitude: null);
 
   @override
   bool operator ==(Object other) =>
@@ -31,23 +25,15 @@ class SimpleLocation extends Entity<SimpleLocation> {
   int get hashCode => id.hashCode ^ latitude.hashCode ^ longitude.hashCode;
 
   @override
-  SimpleLocation copyWith({
-    String id,
-    double latitude,
-    double longitude,
-  }) =>
+  SimpleLocation copyWith({String id, double latitude, double longitude}) =>
       SimpleLocation(
-        id: id ?? this.id,
-        latitude: latitude ?? this.latitude,
-        longitude: longitude ?? this.longitude,
-      );
+          id: id ?? this.id,
+          latitude: latitude ?? this.latitude,
+          longitude: longitude ?? this.longitude);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'latitude': latitude,
-        'longitude': longitude,
-      };
+  Map<String, dynamic> toJson() =>
+      {'id': id, 'latitude': latitude, 'longitude': longitude};
 
   @override
   SimpleLocation.fromJson(json)

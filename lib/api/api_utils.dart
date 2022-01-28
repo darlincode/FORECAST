@@ -6,12 +6,11 @@ class APIResponse<T> {
   final T result;
   final int status;
 
-  APIResponse({
-    @required this.isOk,
-    @required this.message,
-    @required this.result,
-    @required this.status,
-  });
+  APIResponse(
+      {@required this.isOk,
+      @required this.message,
+      @required this.result,
+      @required this.status});
 
   @override
   String toString() =>

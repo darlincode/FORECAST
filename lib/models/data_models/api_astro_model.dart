@@ -5,18 +5,14 @@ import 'package:flutter/material.dart';
 class APIAstro extends Entity<APIAstro> {
   final String sunrise, sunset, moon_phase;
 
-  APIAstro({
-    @required this.sunrise,
-    @required this.sunset,
-    @required this.moon_phase,
-  });
+  APIAstro(
+      {@required this.sunrise,
+      @required this.sunset,
+      @required this.moon_phase});
 
   @override
-  factory APIAstro.createEmpty() => APIAstro(
-        sunrise: null,
-        sunset: null,
-        moon_phase: null,
-      );
+  factory APIAstro.createEmpty() =>
+      APIAstro(sunrise: null, sunset: null, moon_phase: null);
 
   @override
   bool operator ==(Object other) =>
@@ -30,23 +26,15 @@ class APIAstro extends Entity<APIAstro> {
   int get hashCode => sunrise.hashCode ^ sunset.hashCode ^ moon_phase.hashCode;
 
   @override
-  APIAstro copyWith({
-    String sunrise,
-    String sunset,
-    String moon_phase,
-  }) =>
+  APIAstro copyWith({String sunrise, String sunset, String moon_phase}) =>
       APIAstro(
-        sunrise: sunrise ?? this.sunrise,
-        sunset: sunset ?? this.sunset,
-        moon_phase: moon_phase ?? this.moon_phase,
-      );
+          sunrise: sunrise ?? this.sunrise,
+          sunset: sunset ?? this.sunset,
+          moon_phase: moon_phase ?? this.moon_phase);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'sunrise': sunrise,
-        'sunset': sunset,
-        'moon_phase': moon_phase,
-      };
+  Map<String, dynamic> toJson() =>
+      {'sunrise': sunrise, 'sunset': sunset, 'moon_phase': moon_phase};
 
   @override
   APIAstro.fromJson(json)

@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 class LocationList extends Entity<LocationList> {
   final List<SimpleLocation> locationList;
 
-  LocationList({
-    @required this.locationList,
-  });
+  LocationList({@required this.locationList});
 
   @override
-  factory LocationList.createEmpty() => LocationList(
-        locationList: List.unmodifiable([]),
-      );
+  factory LocationList.createEmpty() =>
+      LocationList(locationList: List.unmodifiable([]));
 
   @override
   bool operator ==(Object other) =>
@@ -23,17 +20,11 @@ class LocationList extends Entity<LocationList> {
   int get hashCode => locationList.hashCode;
 
   @override
-  LocationList copyWith({
-    List<SimpleLocation> locationList,
-  }) =>
-      LocationList(
-        locationList: locationList ?? this.locationList,
-      );
+  LocationList copyWith({List<SimpleLocation> locationList}) =>
+      LocationList(locationList: locationList ?? this.locationList);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'locationList': locationList ?? null,
-      };
+  Map<String, dynamic> toJson() => {'locationList': locationList ?? null};
 
   @override
   LocationList.fromJson(json)

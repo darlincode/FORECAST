@@ -33,8 +33,6 @@ List<SimpleLocation> locationListReducer(List<SimpleLocation> state, action) {
         longitude: action.longitude);
     if (List.from(state).isEmpty) {
       return List.unmodifiable([_newLoc]);
-      // ..removeAt(action.index)
-      // ..insert(action.index, _newLoc);
     } else {
       return List.from(state)
         ..removeAt(action.index)

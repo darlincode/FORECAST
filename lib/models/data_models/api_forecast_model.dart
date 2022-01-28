@@ -8,9 +8,7 @@ class APIForecast extends Entity<APIForecast> {
   APIForecast({this.forecastday});
 
   @override
-  factory APIForecast.createEmpty() => APIForecast(
-        forecastday: [],
-      );
+  factory APIForecast.createEmpty() => APIForecast(forecastday: []);
 
   @override
   bool operator ==(Object other) =>
@@ -21,17 +19,11 @@ class APIForecast extends Entity<APIForecast> {
   int get hashCode => forecastday.hashCode;
 
   @override
-  APIForecast copyWith({ 
-    List<APIForecastDay> forecastday,
-  }) =>
-      APIForecast(
-        forecastday: forecastday ?? this.forecastday,
-      );
+  APIForecast copyWith({List<APIForecastDay> forecastday}) =>
+      APIForecast(forecastday: forecastday ?? this.forecastday);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'forecastday': forecastday,
-      };
+  Map<String, dynamic> toJson() => {'forecastday': forecastday};
 
   @override
   APIForecast.fromJson(json)

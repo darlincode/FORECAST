@@ -68,7 +68,6 @@ void main() async {
       ],
       path: 'assets/translations',
       fallbackLocale: const Locale('en'),
-      // startLocale: Locale('en'),
       child: ForecastApp(globalStore)));
 }
 
@@ -76,11 +75,6 @@ void main() async {
 class ForecastApp extends StatelessWidget {
   final Store<GlobalAppState> store;
   ForecastApp(this.store);
-
-  // void onInit(store) {
-  //   print('main.onInit fired');
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StoreProvider(
@@ -96,12 +90,12 @@ class ForecastApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Montserrat',
         ),
-        // darkTheme: ThemeData.dark(),
-        home: StoreBuilder<GlobalAppState>(
-          // onInit: onInit,
-          builder: (BuildContext context, Store<GlobalAppState> store) =>
-              HomeScreen(),
-        ),
+        home: HomeScreen(),
+        // StoreBuilder<GlobalAppState>(
+        //   // onInit: onInit,
+        //   builder: (BuildContext context, Store<GlobalAppState> store) =>
+        //       HomeScreen(),
+        // ),
       ),
     );
   }

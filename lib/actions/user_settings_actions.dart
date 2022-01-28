@@ -17,32 +17,9 @@ class UpdateUserSettingsAction {
 @immutable
 class ToggleAnimatedBackgroundsAction {}
 
-// /// Reducer for animated backgrounds
-// @immutable
-// class SetToggleAnimatedBackgroundsAction {
-//   final bool useAnimatedBackgrounds;
-//   SetToggleAnimatedBackgroundsAction(this.useAnimatedBackgrounds);
-// }
-
 /// Toggle dark theme
 @immutable
 class ToggleDarkModeAction {}
-
-// /// Reducer for dark theme
-// @immutable
-// class SetToggleDarkModeAction {
-//   final bool useDarkMode;
-//   SetToggleDarkModeAction(this.useDarkMode);
-
-//   @override
-//   String toString() {
-//     return 'SetToggleDarkModeAction{useDarkMode: $useDarkMode}';
-//   }
-// }
-
-// /// Toggle "Add location mode"
-// @immutable
-// class ToggleAddLocationModeAction {}
 
 /// Change temperature units
 @immutable

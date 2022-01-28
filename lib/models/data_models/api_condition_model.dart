@@ -6,18 +6,11 @@ class APICondition extends Entity<APICondition> {
   final String text, icon;
   final int code;
 
-  APICondition({
-    @required this.text,
-    @required this.icon,
-    @required this.code,
-  });
+  APICondition({@required this.text, @required this.icon, @required this.code});
 
   @override
-  factory APICondition.createEmpty() => APICondition(
-        text: null,
-        icon: null,
-        code: null,
-      );
+  factory APICondition.createEmpty() =>
+      APICondition(text: null, icon: null, code: null);
 
   @override
   bool operator ==(Object other) =>
@@ -31,23 +24,13 @@ class APICondition extends Entity<APICondition> {
   int get hashCode => text.hashCode ^ icon.hashCode ^ code.hashCode;
 
   @override
-  APICondition copyWith({
-    String text,
-    String icon,
-    int code,
-  }) =>
-      APICondition(
-        text: text ?? this.text,
-        icon: icon ?? this.icon,
-        code: code ?? this.code,
-      );
+  APICondition copyWith({String text, String icon, int code}) => APICondition(
+      text: text ?? this.text,
+      icon: icon ?? this.icon,
+      code: code ?? this.code);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'text': text,
-        'icon': icon,
-        'code': code,
-      };
+  Map<String, dynamic> toJson() => {'text': text, 'icon': icon, 'code': code};
 
   @override
   APICondition.fromJson(json)

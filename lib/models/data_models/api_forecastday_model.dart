@@ -9,22 +9,16 @@ class APIForecastDay extends Entity<APIForecastDay> {
   final APIAstro astro;
   final List<APIHour> hour;
 
-  APIForecastDay({
-    @required this.date,
-    @required this.date_epoch,
-    @required this.day,
-    @required this.astro,
-    @required this.hour,
-  });
+  APIForecastDay(
+      {@required this.date,
+      @required this.date_epoch,
+      @required this.day,
+      @required this.astro,
+      @required this.hour});
 
   @override
   factory APIForecastDay.createEmpty() => APIForecastDay(
-        date: null,
-        date_epoch: null,
-        day: null,
-        astro: null,
-        hour: null,
-      );
+      date: null, date_epoch: null, day: null, astro: null, hour: null);
 
   @override
   bool operator ==(Object other) =>
@@ -45,20 +39,18 @@ class APIForecastDay extends Entity<APIForecastDay> {
       hour.hashCode;
 
   @override
-  APIForecastDay copyWith({
-    String date,
-    int date_epoch,
-    APIDay day,
-    APIAstro astro,
-    List<APIHour> hour,
-  }) =>
+  APIForecastDay copyWith(
+          {String date,
+          int date_epoch,
+          APIDay day,
+          APIAstro astro,
+          List<APIHour> hour}) =>
       APIForecastDay(
-        date: date ?? this.date,
-        date_epoch: date_epoch ?? this.date_epoch,
-        day: day ?? this.day,
-        astro: astro ?? this.astro,
-        hour: hour ?? this.hour,
-      );
+          date: date ?? this.date,
+          date_epoch: date_epoch ?? this.date_epoch,
+          day: day ?? this.day,
+          astro: astro ?? this.astro,
+          hour: hour ?? this.hour);
 
   @override
   Map<String, dynamic> toJson() => {
@@ -66,7 +58,7 @@ class APIForecastDay extends Entity<APIForecastDay> {
         'date_epoch': date_epoch,
         'day': day,
         'astro': astro,
-        'hour': hour,
+        'hour': hour
       };
 
   @override

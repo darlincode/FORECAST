@@ -20,11 +20,10 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
 
   @override
   factory WeatherStateRepository.createEmpty() => WeatherStateRepository(
-        location: APILocation.createEmpty(),
-        currentConditions: APICurrentConditions.createEmpty(),
-        forecast: APIForecast.createEmpty(),
-        weatherAlerts: [],
-      );
+      location: APILocation.createEmpty(),
+      currentConditions: APICurrentConditions.createEmpty(),
+      forecast: APIForecast.createEmpty(),
+      weatherAlerts: []);
 
   @override
   bool operator ==(Object other) =>
@@ -43,27 +42,25 @@ class WeatherStateRepository extends Entity<WeatherStateRepository> {
       weatherAlerts.hashCode;
 
   @override
-  WeatherStateRepository copyWith({
-    APILocation location,
-    APICurrentConditions currentConditions,
-    APIForecast forecast,
-    List<APIAlert> weatherAlerts,
-  }) =>
+  WeatherStateRepository copyWith(
+          {APILocation location,
+          APICurrentConditions currentConditions,
+          APIForecast forecast,
+          List<APIAlert> weatherAlerts}) =>
       WeatherStateRepository(
-        location: location ?? this.location,
-        currentConditions: currentConditions ?? this.currentConditions,
-        forecast: forecast ?? this.forecast,
-        weatherAlerts: weatherAlerts ?? this.weatherAlerts,
-      );
+          location: location ?? this.location,
+          currentConditions: currentConditions ?? this.currentConditions,
+          forecast: forecast ?? this.forecast,
+          weatherAlerts: weatherAlerts ?? this.weatherAlerts);
 
   @override
   Map<String, dynamic> toJson() => {
         'location': location ?? null,
         'currentConditions': currentConditions ?? null,
         'forecast': forecast ?? null,
-        'weatherAlerts': weatherAlerts ?? null,
+        'weatherAlerts': weatherAlerts ?? null
       };
-      
+
   @override
   WeatherStateRepository.fromJson(Map<String, dynamic> json)
       : location = APILocation.fromJson(json['location']),

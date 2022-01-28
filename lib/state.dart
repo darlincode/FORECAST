@@ -10,13 +10,12 @@ class GlobalAppState {
   final SettingsStateRepository userSettings; // user settings
   final LoadingStatus loadingStatus; // api loading status
 
-  GlobalAppState({
-    @required this.weatherDataList,
-    @required this.locationList,
-    @required this.activeLocationIndex,
-    @required this.loadingStatus,
-    @required this.userSettings,
-  });
+  GlobalAppState(
+      {@required this.weatherDataList,
+      @required this.locationList,
+      @required this.activeLocationIndex,
+      @required this.loadingStatus,
+      @required this.userSettings});
 
   GlobalAppState.initialState()
       : activeLocationIndex = 0,
@@ -43,21 +42,19 @@ class GlobalAppState {
       locationList.hashCode ^
       loadingStatus.hashCode;
 
-  GlobalAppState copyWith({
-    WeatherStateRepository weatherData,
-    int activeLocationIndex,
-    SettingsStateRepository userSettings,
-    List<WeatherStateRepository> weatherDataList,
-    List<SimpleLocation> locationList,
-    LoadingStatus loadingStatus,
-  }) =>
+  GlobalAppState copyWith(
+          {WeatherStateRepository weatherData,
+          int activeLocationIndex,
+          SettingsStateRepository userSettings,
+          List<WeatherStateRepository> weatherDataList,
+          List<SimpleLocation> locationList,
+          LoadingStatus loadingStatus}) =>
       GlobalAppState(
-        activeLocationIndex: activeLocationIndex ?? this.activeLocationIndex,
-        userSettings: userSettings ?? this.userSettings,
-        weatherDataList: weatherDataList ?? this.weatherDataList,
-        locationList: locationList ?? this.locationList,
-        loadingStatus: loadingStatus ?? this.loadingStatus,
-      );
+          activeLocationIndex: activeLocationIndex ?? this.activeLocationIndex,
+          userSettings: userSettings ?? this.userSettings,
+          weatherDataList: weatherDataList ?? this.weatherDataList,
+          locationList: locationList ?? this.locationList,
+          loadingStatus: loadingStatus ?? this.loadingStatus);
 
   GlobalAppState.fromJson(Map<String, dynamic> json)
       : userSettings = SettingsStateRepository.fromJson(json['userSettings']),
@@ -71,6 +68,6 @@ class GlobalAppState {
   Map<String, dynamic> toJson() => {
         'userSettings': userSettings,
         'activeLocationIndex': activeLocationIndex,
-        'locationList': locationList,
+        'locationList': locationList
       };
 }

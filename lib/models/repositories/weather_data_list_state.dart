@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 class WeatherDataList extends Entity<WeatherDataList> {
   final List<WeatherStateRepository> weatherDataList;
 
-  WeatherDataList({
-    @required this.weatherDataList,
-  });
+  WeatherDataList({@required this.weatherDataList});
 
   @override
-  factory WeatherDataList.createEmpty() => WeatherDataList(
-        weatherDataList: List.unmodifiable([]),
-      );
+  factory WeatherDataList.createEmpty() =>
+      WeatherDataList(weatherDataList: List.unmodifiable([]));
 
   @override
   bool operator ==(Object other) =>
@@ -23,17 +20,11 @@ class WeatherDataList extends Entity<WeatherDataList> {
   int get hashCode => weatherDataList.hashCode;
 
   @override
-  WeatherDataList copyWith({
-    List<WeatherStateRepository> weatherDataList,
-  }) =>
-      WeatherDataList(
-        weatherDataList: weatherDataList ?? this.weatherDataList,
-      );
+  WeatherDataList copyWith({List<WeatherStateRepository> weatherDataList}) =>
+      WeatherDataList(weatherDataList: weatherDataList ?? this.weatherDataList);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'weatherDataList': weatherDataList ?? null,
-      };
+  Map<String, dynamic> toJson() => {'weatherDataList': weatherDataList ?? null};
 
   @override
   WeatherDataList.fromJson(json)

@@ -7,28 +7,26 @@ class APILocation extends Entity<APILocation> {
   final double lat, long;
   final int localtime_epoch;
 
-  APILocation({
-    @required this.name,
-    @required this.region,
-    @required this.country,
-    @required this.lat,
-    @required this.long,
-    @required this.tz_id,
-    @required this.localtime_epoch,
-    @required this.localtime,
-  });
+  APILocation(
+      {@required this.name,
+      @required this.region,
+      @required this.country,
+      @required this.lat,
+      @required this.long,
+      @required this.tz_id,
+      @required this.localtime_epoch,
+      @required this.localtime});
 
   @override
   factory APILocation.createEmpty() => APILocation(
-        name: null,
-        region: null,
-        country: null,
-        lat: null,
-        long: null,
-        tz_id: null,
-        localtime_epoch: null,
-        localtime: null,
-      );
+      name: null,
+      region: null,
+      country: null,
+      lat: null,
+      long: null,
+      tz_id: null,
+      localtime_epoch: null,
+      localtime: null);
 
   @override
   bool operator ==(Object other) =>
@@ -55,26 +53,24 @@ class APILocation extends Entity<APILocation> {
       localtime.hashCode;
 
   @override
-  APILocation copyWith({
-    String name,
-    String region,
-    String country,
-    double lat,
-    double long,
-    String tz_id,
-    int localtime_epoch,
-    String localtime,
-  }) =>
+  APILocation copyWith(
+          {String name,
+          String region,
+          String country,
+          double lat,
+          double long,
+          String tz_id,
+          int localtime_epoch,
+          String localtime}) =>
       APILocation(
-        name: name ?? this.name,
-        region: region ?? this.region,
-        country: country ?? this.country,
-        lat: lat ?? this.lat,
-        long: long ?? this.long,
-        tz_id: tz_id ?? this.tz_id,
-        localtime_epoch: localtime_epoch ?? this.localtime_epoch,
-        localtime: localtime ?? this.localtime,
-      );
+          name: name ?? this.name,
+          region: region ?? this.region,
+          country: country ?? this.country,
+          lat: lat ?? this.lat,
+          long: long ?? this.long,
+          tz_id: tz_id ?? this.tz_id,
+          localtime_epoch: localtime_epoch ?? this.localtime_epoch,
+          localtime: localtime ?? this.localtime);
 
   @override
   Map<String, dynamic> toJson() => {
@@ -85,7 +81,7 @@ class APILocation extends Entity<APILocation> {
         'long': long,
         'tz_id': tz_id,
         'localtime_epoch': localtime_epoch,
-        'localtime': localtime,
+        'localtime': localtime
       };
 
   @override

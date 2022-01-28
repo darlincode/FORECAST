@@ -9,32 +9,30 @@ class APIDay extends Entity<APIDay> {
   final APICondition condition;
   final APIAQI air_quality;
 
-  APIDay({
-    @required this.maxtemp_c,
-    @required this.maxtemp_f,
-    @required this.mintemp_c,
-    @required this.mintemp_f,
-    @required this.avghumidity,
-    @required this.daily_will_it_rain,
-    @required this.daily_chance_of_rain,
-    @required this.condition,
-    @required this.uv,
-    @required this.air_quality,
-  });
+  APIDay(
+      {@required this.maxtemp_c,
+      @required this.maxtemp_f,
+      @required this.mintemp_c,
+      @required this.mintemp_f,
+      @required this.avghumidity,
+      @required this.daily_will_it_rain,
+      @required this.daily_chance_of_rain,
+      @required this.condition,
+      @required this.uv,
+      @required this.air_quality});
 
   @override
   factory APIDay.createEmpty() => APIDay(
-        maxtemp_c: null,
-        maxtemp_f: null,
-        mintemp_c: null,
-        mintemp_f: null,
-        avghumidity: null,
-        daily_will_it_rain: null,
-        daily_chance_of_rain: null,
-        condition: null,
-        uv: null,
-        air_quality: null,
-      );
+      maxtemp_c: null,
+      maxtemp_f: null,
+      mintemp_c: null,
+      mintemp_f: null,
+      avghumidity: null,
+      daily_will_it_rain: null,
+      daily_chance_of_rain: null,
+      condition: null,
+      uv: null,
+      air_quality: null);
 
   @override
   bool operator ==(Object other) =>
@@ -65,30 +63,29 @@ class APIDay extends Entity<APIDay> {
       air_quality.hashCode;
 
   @override
-  APIDay copyWith({
-    double maxtemp_c,
-    double maxtemp_f,
-    double mintemp_c,
-    double mintemp_f,
-    int avghumidity,
-    int daily_will_it_rain,
-    int daily_chance_of_rain,
-    APICondition condition,
-    int uv,
-    APIAQI air_quality,
-  }) =>
+  APIDay copyWith(
+          {double maxtemp_c,
+          double maxtemp_f,
+          double mintemp_c,
+          double mintemp_f,
+          int avghumidity,
+          int daily_will_it_rain,
+          int daily_chance_of_rain,
+          APICondition condition,
+          int uv,
+          APIAQI air_quality}) =>
       APIDay(
-        maxtemp_c: maxtemp_c ?? this.maxtemp_c,
-        maxtemp_f: maxtemp_f ?? this.maxtemp_f,
-        mintemp_c: mintemp_c ?? this.mintemp_c,
-        mintemp_f: mintemp_f ?? this.mintemp_f,
-        avghumidity: avghumidity ?? this.avghumidity,
-        daily_will_it_rain: daily_will_it_rain ?? this.daily_will_it_rain,
-        daily_chance_of_rain: daily_chance_of_rain ?? this.daily_chance_of_rain,
-        condition: condition ?? this.condition,
-        uv: uv ?? this.uv,
-        air_quality: air_quality ?? this.air_quality,
-      );
+          maxtemp_c: maxtemp_c ?? this.maxtemp_c,
+          maxtemp_f: maxtemp_f ?? this.maxtemp_f,
+          mintemp_c: mintemp_c ?? this.mintemp_c,
+          mintemp_f: mintemp_f ?? this.mintemp_f,
+          avghumidity: avghumidity ?? this.avghumidity,
+          daily_will_it_rain: daily_will_it_rain ?? this.daily_will_it_rain,
+          daily_chance_of_rain:
+              daily_chance_of_rain ?? this.daily_chance_of_rain,
+          condition: condition ?? this.condition,
+          uv: uv ?? this.uv,
+          air_quality: air_quality ?? this.air_quality);
 
   @override
   Map<String, dynamic> toJson() => {
@@ -101,7 +98,7 @@ class APIDay extends Entity<APIDay> {
         'daily_chance_of_rain': daily_chance_of_rain,
         'condition': condition,
         'uv': uv,
-        'air_quality': air_quality,
+        'air_quality': air_quality
       };
 
   @override
