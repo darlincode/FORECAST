@@ -34,16 +34,19 @@ class _FancyDrawerState extends State<FancyDrawer> {
                     child: SingleChildScrollView(
                         child: Padding(
                             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                            child: Column(children: [
-                              SizedBox(height: 16),
-                              _buildSettingsSection(viewModel),
-                              SizedBox(height: 16),
-                              _buildLocationSection(viewModel),
-                              SizedBox(height: 16),
-                              _buildAboutAppSection(viewModel),
-                              SizedBox(height: 32),
-                              _buildCloseSettingsBtn(viewModel),
-                            ])))))
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Column(children: [
+                                // SizedBox(height: 16),
+                                _buildSettingsSection(viewModel),
+                                SizedBox(height: 16),
+                                _buildLocationSection(viewModel),
+                                SizedBox(height: 16),
+                                _buildAboutAppSection(viewModel),
+                                SizedBox(height: 32),
+                                _buildCloseSettingsBtn(viewModel),
+                              ]),
+                            )))))
             : Container(
                 height: _sh, width: _sw * 0.8, color: Colors.transparent);
       },
@@ -114,6 +117,12 @@ class _FancyDrawerState extends State<FancyDrawer> {
         style: drawerHeaderTextStyle.copyWith(color: viewModel.textColor));
   }
 
+  /// Locations tile header
+  Widget _buildLocationsHeader(WidgetViewModel viewModel) {
+    return Text(tr('settings.locations_header'),
+        style: drawerHeaderTextStyle.copyWith(color: viewModel.textColor));
+  }
+
   /// Switch to enable/disable animated backgrounds - default ENABLED
   Widget _buildAnimatedBackgroundToggle(WidgetViewModel viewModel) {
     int _index = 0;
@@ -170,12 +179,6 @@ class _FancyDrawerState extends State<FancyDrawer> {
         ),
       ],
     );
-  }
-
-  /// Locations tile header
-  Widget _buildLocationsHeader(WidgetViewModel viewModel) {
-    return Text(tr('settings.locations_header'),
-        style: drawerHeaderTextStyle.copyWith(color: viewModel.textColor));
   }
 
   /// Search bar to add locations
@@ -274,7 +277,7 @@ class _FancyDrawerState extends State<FancyDrawer> {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             primary: viewModel.drawerColor, onPrimary: viewModel.textColor),
-        child: Text(tr('close')),
+        child: Text(tr('close'), style: settingsButtonStyle),
         onPressed: () {
           Navigator.of(context).pop();
         });
