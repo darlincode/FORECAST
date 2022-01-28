@@ -27,7 +27,10 @@ const TextStyle drawerHeaderTextStyle = TextStyle(
 );
 const TextStyle drawerSubtitleTextStyle = TextStyle(
   fontSize: 16,
-  // fontFamily: 'Raleway',
+);
+const TextStyle settingsButtonStyle = TextStyle(
+  fontSize: 18,
+  fontFamily: 'CarroisSC',
 );
 
 // Colors
