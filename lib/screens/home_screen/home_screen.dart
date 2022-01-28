@@ -1,11 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fancy_weather/actions/actions.dart';
-// import 'package:fancy_weather/routes.dart';
 import 'package:fancy_weather/screens/home_screen/home_screen_view_model.dart';
-// import 'package:fancy_weather/screens/screens.dart';
+import 'package:fancy_weather/screens/screens.dart';
 import 'package:fancy_weather/state.dart';
 import 'package:fancy_weather/theme.dart';
-import 'package:fancy_weather/widgets/fancy_end_drawer.dart';
+import 'package:fancy_weather/widgets/fancy_drawer.dart';
 import 'package:fancy_weather/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -28,16 +27,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildRefreshButton(HomeScreenViewModel viewModel) {
     return IconButton(
-      icon: Icon(Icons.refresh, color: darkGrey.withOpacity(0.6), size: 32),
+      icon: Icon(Icons.refresh, color: grey.withOpacity(0.8), size: 32),
       onPressed: () {
         viewModel.refreshScreen();
       },
     );
   }
 
-  Widget _buildSettingsButton() {
+  Widget _buildSettingsButton(HomeScreenViewModel viewModel) {
     return IconButton(
-      icon: Icon(Icons.settings, color: darkGrey.withOpacity(0.6), size: 32),
+      icon: Icon(Icons.settings, color: grey.withOpacity(0.8), size: 32),
       onPressed: () {
         _scaffoldKey.currentState.openDrawer();
       },
@@ -75,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
             : bgColorLightMode;
   }
 
-  /// Build body weather detail panels
+  /// Build body panels
   List<Widget> _buildWeatherDetails(viewModel) {
     return [
       SizedBox(height: 48),
@@ -103,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           key: _scaffoldKey,
           backgroundColor: _getBgColor(viewModel),
-          drawer: FancyEndDrawer(),
+          drawer: FancyDrawer(),
           body: viewModel != null
               ? viewModel.isLoading
                   ? SplashScreen()
@@ -132,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  _buildSettingsButton(),
+                                  _buildSettingsButton(viewModel),
                                   if (viewModel.isActiveWeatherAlerts)
                                     _buildWeatherAlertChip(viewModel),
                                   _buildRefreshButton(viewModel),
@@ -146,34 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
               : SplashScreen(),
         );
       },
-    );
-  }
-}
-
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 96,
-            width: 96,
-            child: Image.asset('assets/images/logo/app_icon.png'),
-          ),
-          SizedBox(height: 32),
-          Text(tr('loading')),
-          SizedBox(height: 16),
-          SizedBox(
-            height: 32,
-            width: 32,
-            child: Center(child: CircularProgressIndicator()),
-          ),
-        ],
-      ),
     );
   }
 }
