@@ -21,6 +21,14 @@ const TextStyle unitsTextStyle = TextStyle(
 );
 const TextStyle bodyTextStyle = TextStyle();
 const TextStyle bodyHeaderTextStyle = TextStyle();
+const TextStyle drawerHeaderTextStyle = TextStyle(
+  fontSize: 24,
+  fontFamily: 'CarroisSC',
+);
+const TextStyle drawerSubtitleTextStyle = TextStyle(
+  fontSize: 16,
+  // fontFamily: 'Raleway',
+);
 
 // Colors
 const Color white = Color(0xFFFFFFFF);
