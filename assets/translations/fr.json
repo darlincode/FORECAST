@@ -75,5 +75,13 @@
         "Moderate or heavy rain with thunder": "Pluie modérée ou forte avec tonnerre",
         "Patchy light snow with thunder": "Neige légère parsemée avec tonnerre",
         "Moderate or heavy snow with thunder": "Neige modérée ou forte avec tonnerre"
+    },
+
+    "cards": {
+        "titles": {
+            "humidity": "Humidité",
+            "uv-index": "Indice UV",
+            "wind_conditions": "Vent"
+        }
     }
 }

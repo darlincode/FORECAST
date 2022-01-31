@@ -75,5 +75,13 @@
         "Moderate or heavy rain with thunder": "Moderate or heavy rain with thunder",
         "Patchy light snow with thunder": "Patchy light snow with thunder",
         "Moderate or heavy snow with thunder": "Moderate or heavy snow with thunder"
+    },
+
+    "cards": {
+        "titles": {
+            "humidity": "Humidity",
+            "uv-index": "UV Index",
+            "wind_conditions": "Wind"
+        }
     }
 }

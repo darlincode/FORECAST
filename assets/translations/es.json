@@ -75,6 +75,14 @@
         "Moderate or heavy rain with thunder": "Lluvia moderada o fuerte con truenos",
         "Patchy light snow with thunder": "Nieve ligera en parches con truenos",
         "Moderate or heavy snow with thunder": "Nieve moderada o fuerte con truenos"
+    },
+
+    "cards": {
+        "titles": {
+            "humidity": "Humedad",
+            "uv-index": "Índice UV",
+            "wind_conditions": "Viento"
+        }
     }
 
 
