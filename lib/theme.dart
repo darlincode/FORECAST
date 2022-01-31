@@ -23,7 +23,7 @@ const TextStyle bodyTextStyle = TextStyle();
 const TextStyle bodyHeaderTextStyle = TextStyle();
 const TextStyle drawerHeaderTextStyle = TextStyle(
   fontSize: 24,
-  fontFamily: 'CarroisSC',
+  fontFamily: 'Raleway',
 );
 const TextStyle drawerSubtitleTextStyle = TextStyle(
   fontSize: 16,
@@ -31,6 +31,14 @@ const TextStyle drawerSubtitleTextStyle = TextStyle(
 const TextStyle settingsButtonStyle = TextStyle(
   fontSize: 18,
   fontFamily: 'CarroisSC',
+);
+const TextStyle cardHeaderStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'AlegreyaSC',
+);
+const TextStyle cardBodyStyle = TextStyle(
+  fontSize: 18,
 );
 
 // Colors
