@@ -5,7 +5,7 @@ import 'package:fancy_weather/screens/screens.dart';
 import 'package:fancy_weather/state.dart';
 import 'package:fancy_weather/theme.dart';
 import 'package:fancy_weather/widgets/fancy_drawer.dart';
-import 'package:fancy_weather/widgets/widgets.dart';
+import 'package:fancy_weather/widgets/cards/cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_weather_bg/bg/weather_bg.dart';
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSettingsButton(HomeScreenViewModel viewModel) {
     return IconButton(
-      icon: Icon(Icons.settings, color: grey.withOpacity(0.8), size: 32),
+      icon: Icon(Icons.menu, color: grey.withOpacity(0.8), size: 32),
       onPressed: () {
         _scaffoldKey.currentState.openDrawer();
       },
@@ -77,8 +77,45 @@ class _HomeScreenState extends State<HomeScreen> {
   /// Build body panels
   List<Widget> _buildWeatherDetails(viewModel) {
     return [
-      SizedBox(height: 48),
-      TemperaturePanel(),
+      const SizedBox(height: 48),
+      const TemperatureCard(),
+      viewModel.useAnimatedBackgrounds
+          ? const SizedBox(height: 8)
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 4),
+                Divider(color: grey, indent: 32, endIndent: 32),
+                const SizedBox(height: 4),
+              ],
+            ),
+      const HumidityUVCard(),
+      viewModel.useAnimatedBackgrounds
+          ? const SizedBox(height: 8)
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 4),
+                Divider(color: grey, indent: 32, endIndent: 32),
+                const SizedBox(height: 4),
+              ],
+            ),
+      const WindConditionsCard(),
+      viewModel.useAnimatedBackgrounds
+          ? const SizedBox(height: 8)
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 4),
+                Divider(color: grey, indent: 32, endIndent: 32),
+                const SizedBox(height: 4),
+              ],
+            ),
+
+      // Row(children: [
+      //   AQICard(),
+      //   AirPressureCard(),
+      // ]),
       // HourlyForecastPanel(),
       // DailyForecastPanel(),
       // ConditionsPanel(),
