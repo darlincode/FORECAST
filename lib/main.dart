@@ -88,7 +88,7 @@ class ForecastApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: 'Montserrat',
+          fontFamily: 'Lato',
         ),
         home: HomeScreen(),
         // StoreBuilder<GlobalAppState>(
