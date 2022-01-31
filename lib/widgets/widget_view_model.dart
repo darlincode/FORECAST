@@ -10,26 +10,27 @@ class WidgetViewModel {
   final Color panelColor;
   final Color textColor;
   final Color drawerColor;
-  final String locale;
+
+  final TextStyle cardHeaderTextStyle;
+  final TextStyle cardbodyTextStyle;
 
   final Function(int) updateTempUnits;
   final Function(int) updateWindSpeedUnits;
   final Function(int) updateAirPressureUnits;
+  final Function(int) updateAQIUnits;
 
   final bool useDarkMode;
-  // final bool isAddLocationMode;
   final bool useAnimatedBackgrounds;
 
   final Function toggleAnimatedBackgrounds;
   final Function toggleDarkMode;
-  // final Function toggleAddLocationField;
-  final Function updateLocale;
+  // final Function updateLocale;
   final List<SimpleLocation> locationList;
   final List<WeatherStateRepository> weatherDataList;
 
   /// Fields to control toggle switch colors and appearance
-  final String toggleDarkModeBtnText;
-  final String toggleAnimBgText;
+  // final String toggleDarkModeBtnText;
+  // final String toggleAnimBgText;
   final IconData toggleDarkModeIcon;
   final IconData toggleAnimBgIcon;
 
@@ -42,22 +43,25 @@ class WidgetViewModel {
   final String conditionsString;
   final double currentTemp;
   final double currentRealfeel;
+  final int currentUV;
+  final int currentHumidity;
+  final double currentWindSpeed;
+  final String currentWindDegreesString;
+  final int currentWindDegrees;
+  final int currentAQI;
 
   WidgetViewModel({
     // @required this.refreshWeatherData,
+    @required this.cardHeaderTextStyle,
+    @required this.cardbodyTextStyle,
     @required this.updateTempUnits,
-    @required this.locale,
     @required this.updateWindSpeedUnits,
     @required this.updateAirPressureUnits,
+    @required this.updateAQIUnits,
     @required this.useDarkMode,
-    // @required this.isAddLocationMode,
     @required this.useAnimatedBackgrounds,
     @required this.toggleAnimatedBackgrounds,
-    @required this.updateLocale,
     @required this.toggleDarkMode,
-    // @required this.toggleAddLocationField,
-    @required this.toggleDarkModeBtnText,
-    @required this.toggleAnimBgText,
     @required this.toggleDarkModeIcon,
     @required this.toggleAnimBgIcon,
     @required this.textColor,
@@ -73,17 +77,19 @@ class WidgetViewModel {
     @required this.windSpeedUnits,
     @required this.conditionsIconUrl,
     @required this.conditionsString,
+    @required this.currentUV,
+    @required this.currentHumidity,
+    @required this.currentWindSpeed,
+    @required this.currentWindDegreesString,
+    @required this.currentWindDegrees,
+    @required this.currentAQI,
   });
 
   factory WidgetViewModel.create(Store<GlobalAppState> store) {
-    // int _getActiveIndex() {
-    //   return store.state.activeLocationIndex ?? 0;
-    // }
-
     // void _refreshWeatherData() {
     //   store.dispatch(
     //     FetchWeatherDataAction(
-    //       index: _getActiveIndex(),
+    //       index: _getActiveLocationIndex(),
     //       latitude: store.state.locationList[_getActiveIndex()].latitude,
     //       longitude: store.state.locationList[_getActiveIndex()].longitude,
     //     ),
@@ -132,7 +138,7 @@ class WidgetViewModel {
           break;
       }
       // fallback value, should never be visible
-      return 1337.01;
+      return 80085.0;
     }
 
     double getCurrentRealfeel() {
@@ -158,7 +164,7 @@ class WidgetViewModel {
       }
 
       /// fallback value, should never be visible
-      return 1337.01;
+      return 80085.0;
     }
 
     String getTempUnitsString() {
@@ -260,11 +266,55 @@ class WidgetViewModel {
       }
     }
 
+    void _updateAQIUnits(int index) {
+      switch (index) {
+        case 0:
+          store.dispatch(ChangeAQIUnitsAction(AQIUnits.US));
+          break;
+        case 1:
+          store.dispatch(ChangeAQIUnitsAction(AQIUnits.GB));
+          break;
+      }
+    }
+
+    int getAQI() {
+      if (store.state.userSettings.aqiUnits == AQIUnits.US) {
+        return store.state.weatherDataList[_getActiveLocationIndex()]
+            .currentConditions.air_quality.us_epa_index;
+      } else {
+        return store.state.weatherDataList[_getActiveLocationIndex()]
+            .currentConditions.air_quality.gb_defra_index;
+      }
+    }
+
+    double getWindSpeed() {
+      switch (store.state.userSettings.windSpeedUnits) {
+        case WindSpeedUnits.Kph:
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+              .currentConditions.wind_kph;
+          break;
+        case WindSpeedUnits.Mph:
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+              .currentConditions.wind_mph;
+          break;
+        case WindSpeedUnits.Knots:
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+              .currentConditions.wind_knots;
+          break;
+        case WindSpeedUnits.Ms:
+          return store.state.weatherDataList[_getActiveLocationIndex()]
+              .currentConditions.wind_ms;
+          break;
+        default:
+          return 80085.0;
+      }
+    }
+
     return WidgetViewModel(
-      // locale: AppLocalizations.
       updateTempUnits: (int index) => _updateTempUnits(index),
       updateWindSpeedUnits: (int index) => _updateWindSpeedUnits(index),
       updateAirPressureUnits: (int index) => _updateAirPressureUnits(index),
+      updateAQIUnits: (int index) => _updateAQIUnits(index),
       panelColor: store.state.userSettings.useDarkMode
           ? bgColorDarkMode.withOpacity(0.45)
           : bgColorLightMode.withOpacity(0.45),
@@ -278,21 +328,12 @@ class WidgetViewModel {
       toggleAnimBgIcon: store.state.userSettings.useAnimatedBackgrounds
           ? Icons.toggle_on_outlined
           : Icons.toggle_off_outlined,
-      toggleAnimBgText: store.state.userSettings.useAnimatedBackgrounds
-          ? 'settings.disable_backgrounds'
-          : 'settings.enable_backgrounds',
-      toggleDarkModeBtnText: store.state.userSettings.useDarkMode
-          ? 'settings.disable_dark_mode'
-          : 'settings.enable_dark_mode',
       useAnimatedBackgrounds: store.state.userSettings.useAnimatedBackgrounds,
       useDarkMode: store.state.userSettings.useDarkMode,
       toggleAnimatedBackgrounds: _toggleAnimatedBackgrounds,
       toggleDarkMode: _toggleDarkMode,
       locationList: store.state.locationList,
       weatherDataList: store.state.weatherDataList,
-      // isAddLocationMode: store.state.userSettings.isAddLocationMode,
-      // toggleAddLocationField: _toggleAddLocationField,
-      updateLocale: (newLocale) => _updateAppLocale,
       airPressureUnits: getAirPressureUnitsString(),
       cityName:
           store.state.weatherDataList[_getActiveLocationIndex()].location.name,
@@ -304,6 +345,27 @@ class WidgetViewModel {
       currentRealfeel: getCurrentRealfeel(),
       tempUnits: getTempUnitsString(),
       windSpeedUnits: getWindSpeedUnitsString(),
+      currentHumidity: store.state.weatherDataList[_getActiveLocationIndex()]
+          .currentConditions.humidity,
+      currentUV: store.state.weatherDataList[_getActiveLocationIndex()]
+          .currentConditions.uv,
+      currentWindSpeed: getWindSpeed(),
+      currentWindDegreesString: store
+          .state
+          .weatherDataList[_getActiveLocationIndex()]
+          .currentConditions
+          .wind_dir,
+      currentWindDegrees: store.state.weatherDataList[_getActiveLocationIndex()]
+          .currentConditions.wind_degree,
+      currentAQI: getAQI(),
+      cardHeaderTextStyle: cardHeaderStyle.copyWith(
+          color: store.state.userSettings.useDarkMode
+              ? textColorDarkMode
+              : textColorLightMode),
+      cardbodyTextStyle: cardBodyStyle.copyWith(
+          color: store.state.userSettings.useDarkMode
+              ? textColorDarkMode
+              : textColorLightMode),
     );
   }
 }
