@@ -56,3 +56,15 @@ class ChangeAirPressureUnitsAction {
     return 'ChangeAirPressureUnitsAction{airPressureUnits: $airPressureUnits}';
   }
 }
+
+/// Change air quality index units
+@immutable
+class ChangeAQIUnitsAction {
+  final AQIUnits aqiUnits;
+  ChangeAQIUnitsAction(this.aqiUnits);
+
+  @override
+  String toString() {
+    return 'ChangeAQIUnitsAction{aqiUnits: $aqiUnits}';
+  }
+}

@@ -1,0 +1,1 @@
+enum AQIUnits { US, GB }

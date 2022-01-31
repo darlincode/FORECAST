@@ -18,6 +18,7 @@ export 'enums/connection_status_model.dart';
 export 'enums/loading_status_model.dart';
 export 'enums/temp_unit_model.dart';
 export 'enums/wind_speed_unit_model.dart';
+export 'enums/aqi_unit_model.dart';
 
 export 'repositories/locations_list_state.dart';
 export 'repositories/settings_state.dart';

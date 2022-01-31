@@ -11,12 +11,14 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   final AirPressureUnits airPressureUnits;
   final bool useAnimatedBackgrounds;
   final List<SimpleLocation> locationList;
+  final AQIUnits aqiUnits;
   // final Locale locale;
 
   SettingsStateRepository({
     @required this.useDarkMode,
     @required this.useAnimatedBackgrounds,
     @required this.tempUnits,
+    @required this.aqiUnits,
     @required this.windSpeedUnits,
     @required this.airPressureUnits,
     @required this.locationList,
@@ -27,6 +29,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
         useDarkMode: false,
         useAnimatedBackgrounds: true,
         tempUnits: TempUnits.C,
+        aqiUnits: AQIUnits.US,
         windSpeedUnits: WindSpeedUnits.Kph,
         airPressureUnits: AirPressureUnits.Kpa,
         locationList: [],
@@ -39,6 +42,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
           other.useDarkMode == useDarkMode &&
           other.useAnimatedBackgrounds == useAnimatedBackgrounds &&
           other.tempUnits == tempUnits &&
+          other.aqiUnits == aqiUnits &&
           other.windSpeedUnits == windSpeedUnits &&
           other.locationList == locationList &&
           other.airPressureUnits == airPressureUnits;
@@ -48,6 +52,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
       useDarkMode.hashCode ^
       useAnimatedBackgrounds.hashCode ^
       tempUnits.hashCode ^
+      aqiUnits.hashCode ^
       windSpeedUnits.hashCode ^
       locationList.hashCode ^
       airPressureUnits.hashCode;
@@ -56,6 +61,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
     bool useDarkMode,
     bool useAnimatedBackgrounds,
     TempUnits tempUnits,
+    AQIUnits aqiUnits,
     WindSpeedUnits windSpeedUnits,
     List<SimpleLocation> locationList,
     AirPressureUnits airPressureUnits,
@@ -65,6 +71,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
         useAnimatedBackgrounds:
             useAnimatedBackgrounds ?? this.useAnimatedBackgrounds,
         tempUnits: tempUnits ?? this.tempUnits,
+        aqiUnits: aqiUnits ?? this.aqiUnits,
         windSpeedUnits: windSpeedUnits ?? this.windSpeedUnits,
         airPressureUnits: airPressureUnits ?? this.airPressureUnits,
         locationList: locationList ?? this.locationList,
@@ -78,6 +85,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
       useDarkMode != null &&
       useAnimatedBackgrounds != null &&
       tempUnits != null &&
+      aqiUnits != null &&
       windSpeedUnits != null &&
       locationList != null &&
       airPressureUnits != null;
@@ -86,6 +94,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
   Map<String, dynamic> toJson() => {
         'airPressureUnits': this.airPressureUnits.index ?? null,
         'tempUnits': this.tempUnits.index ?? null,
+        'aqiUnits': this.aqiUnits.index ?? null,
         'windSpeedUnits': windSpeedUnits ?? null,
         'useDarkMode': useDarkMode ?? null,
         'locationList': locationList ?? null,
@@ -99,6 +108,7 @@ class SettingsStateRepository extends Entity<SettingsStateRepository> {
                 AirPressureUnits.Kpa,
         tempUnits =
             TempUnits.values.elementAt(json['tempUnits']) ?? TempUnits.C,
+        aqiUnits = AQIUnits.values.elementAt(json['aqiUnits']) ?? AQIUnits.US,
         windSpeedUnits =
             WindSpeedUnits.values.elementAt(json['windSpeedUnits']) ??
                 WindSpeedUnits.Kph,

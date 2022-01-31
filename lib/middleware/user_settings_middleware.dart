@@ -57,3 +57,12 @@ Middleware<GlobalAppState> handleChangeAirPressureUnitsRequest() {
     //
   });
 }
+
+Middleware<GlobalAppState> handleChangeAQIUnitsRequest() {
+  return TypedMiddleware<GlobalAppState, ChangeAQIUnitsAction>(
+      (Store<GlobalAppState> store, ChangeAQIUnitsAction action,
+          NextDispatcher next) {
+    store.dispatch(UpdateUserSettingsAction(
+        store.state.userSettings.copyWith(aqiUnits: action.aqiUnits)));
+  });
+}
