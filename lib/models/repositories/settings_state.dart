@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 @immutable
 class SettingsStateRepository extends Entity<SettingsStateRepository> {
   final bool useDarkMode;
-  // final bool isAddLocationMode;
   final TempUnits tempUnits;
   final WindSpeedUnits windSpeedUnits;
   final AirPressureUnits airPressureUnits;
   final bool useAnimatedBackgrounds;
   final List<SimpleLocation> locationList;
   final AQIUnits aqiUnits;
-  // final Locale locale;
 
   SettingsStateRepository({
     @required this.useDarkMode,
