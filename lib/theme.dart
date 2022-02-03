@@ -33,8 +33,8 @@ const TextStyle settingsButtonStyle = TextStyle(
   fontFamily: 'CarroisSC',
 );
 const TextStyle cardHeaderStyle = TextStyle(
-  fontSize: 20,
-  fontWeight: FontWeight.bold,
+  fontSize: 18,
+  // fontWeight: FontWeight.bold,
   fontFamily: 'AlegreyaSC',
 );
 const TextStyle cardBodyStyle = TextStyle(
