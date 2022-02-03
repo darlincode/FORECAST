@@ -18,6 +18,6 @@ SettingsStateRepository _setUserSettingsReducer(
     useAnimatedBackgrounds: action.userSettings.useAnimatedBackgrounds,
     useDarkMode: action.userSettings.useDarkMode,
     windSpeedUnits: action.userSettings.windSpeedUnits,
-    // isAddLocationMode: action.userSettings.isAddLocationMode,
+    aqiUnits: action.userSettings.aqiUnits,
   );
 }
