@@ -12,4 +12,5 @@ class ForecastIcons {
   static const String add = 'assets/icons/plus.svg';
   static const String radiobutton = 'assets/icons/radiobox-blank.svg';
   static const String radiobutton_marked = 'assets/icons/radiobox-marked.svg';
+  static const String sun = 'assets/icons/sun.svg';
 }
