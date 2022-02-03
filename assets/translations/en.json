@@ -22,7 +22,8 @@
         "air_pressure_units": "Air Pressure Units",
         "select_language": "Language",
         "on": "Enable",
-        "off": "Disable"
+        "off": "Disable",
+        "aqi-units": "Air Quality Index Units"
     },
     
     "conditions": {
@@ -77,11 +78,32 @@
         "Moderate or heavy snow with thunder": "Moderate or heavy snow with thunder"
     },
 
+    "wind-dir": {
+        "n": "N",
+        "nne": "NNE",
+        "ne": "NE",
+        "ene": "ENE",
+        "e": "E",
+        "ese": "ESE",
+        "se": "SE",
+        "sse": "SSE",
+        "s": "S",
+        "ssw": "SSW",
+        "sw": "SW",
+        "wsw": "WSW",
+        "w": "W",
+        "wnw": "WNW",
+        "nw": "NW",
+        "nnw": "NNW"
+    },
+
     "cards": {
         "titles": {
             "humidity": "Humidity",
             "uv-index": "UV Index",
-            "wind_conditions": "Wind"
+            "wind-conditions": "Wind",
+            "sunset": "Sunrise and Sunset",
+            "moon-phase": "Moon Phase"
         }
     }
 }

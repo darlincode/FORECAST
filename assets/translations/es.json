@@ -22,7 +22,8 @@
         "air_pressure_units": "Unidades de presión de aire",
         "select_language": "Idioma",
         "on": "Habilitar",
-        "off": "Inhabilitar"
+        "off": "Inhabilitar",
+        "aqi-units": "Air Quality Index Units"
     },
     
     "conditions": {
@@ -77,14 +78,32 @@
         "Moderate or heavy snow with thunder": "Nieve moderada o fuerte con truenos"
     },
 
+    "wind-dir": {
+        "n": "N",
+        "nne": "NNE",
+        "ne": "NE",
+        "ene": "ENE",
+        "e": "E",
+        "ese": "ESE",
+        "se": "SE",
+        "sse": "SSE",
+        "s": "S",
+        "ssw": "SSW",
+        "sw": "SW",
+        "wsw": "WSW",
+        "w": "W",
+        "wnw": "WNW",
+        "nw": "NW",
+        "nnw": "NNW"
+    },
+
     "cards": {
         "titles": {
             "humidity": "Humedad",
             "uv-index": "Índice UV",
-            "wind_conditions": "Viento"
+            "wind-conditions": "Viento",
+            "sunset": "Sunset",
+            "moon-phase": "Moon Phase"
         }
     }
-
-
-
 }
