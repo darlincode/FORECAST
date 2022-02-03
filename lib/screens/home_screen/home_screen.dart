@@ -4,7 +4,7 @@ import 'package:fancy_weather/screens/home_screen/home_screen_view_model.dart';
 import 'package:fancy_weather/screens/screens.dart';
 import 'package:fancy_weather/state.dart';
 import 'package:fancy_weather/theme.dart';
-import 'package:fancy_weather/widgets/fancy_drawer.dart';
+import 'package:fancy_weather/widgets/fancy_drawer/fancy_drawer.dart';
 import 'package:fancy_weather/widgets/cards/cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -79,50 +79,46 @@ class _HomeScreenState extends State<HomeScreen> {
     return [
       const SizedBox(height: 48),
       const TemperatureCard(),
-      viewModel.useAnimatedBackgrounds
-          ? const SizedBox(height: 8)
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 4),
-                Divider(color: grey, indent: 32, endIndent: 32),
-                const SizedBox(height: 4),
-              ],
-            ),
+      _fancyDivider(viewModel),
       const HumidityUVCard(),
-      viewModel.useAnimatedBackgrounds
-          ? const SizedBox(height: 8)
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 4),
-                Divider(color: grey, indent: 32, endIndent: 32),
-                const SizedBox(height: 4),
-              ],
-            ),
+      _fancyDivider(viewModel),
       const WindConditionsCard(),
-      viewModel.useAnimatedBackgrounds
-          ? const SizedBox(height: 8)
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 4),
-                Divider(color: grey, indent: 32, endIndent: 32),
-                const SizedBox(height: 4),
-              ],
-            ),
-
-      // Row(children: [
+      _fancyDivider(viewModel),
       //   AQICard(),
       //   AirPressureCard(),
-      // ]),
+      AstroDataCard(),
+      _fancyDivider(viewModel),
       // HourlyForecastPanel(),
       // DailyForecastPanel(),
       // ConditionsPanel(),
       // WindConditionsPanel(),
       // AirQualityPanel(),
-      // AstroDataPanel(),
     ];
+  }
+
+  Widget _fancyDivider(HomeScreenViewModel viewModel) {
+    return viewModel.useAnimatedBackgrounds
+        ? const SizedBox(height: 8)
+        : Column(mainAxisSize: MainAxisSize.min, children: [
+            const SizedBox(height: 4),
+            Divider(color: grey, indent: 32, endIndent: 32),
+            const SizedBox(height: 4)
+          ]);
+  }
+
+  Widget _buildBodyContent(viewModel, _sw) {
+    return SafeArea(
+        child: Stack(children: [
+      SingleChildScrollView(
+          child: Container(
+              width: _sw,
+              child: Column(children: _buildWeatherDetails(viewModel)))),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _buildSettingsButton(viewModel),
+        if (viewModel.isActiveWeatherAlerts) _buildWeatherAlertChip(viewModel),
+        _buildRefreshButton(viewModel),
+      ])
+    ]));
   }
 
   @override
@@ -131,57 +127,28 @@ class _HomeScreenState extends State<HomeScreen> {
     final double _sh = MediaQuery.of(context).size.height;
 
     return StoreConnector<GlobalAppState, HomeScreenViewModel>(
-      distinct: true,
-      converter: (Store<GlobalAppState> store) =>
-          HomeScreenViewModel.create(store),
-      onInit: _onInit,
-      builder: (BuildContext context, HomeScreenViewModel viewModel) {
-        return Scaffold(
-          key: _scaffoldKey,
-          backgroundColor: _getBgColor(viewModel),
-          drawer: FancyDrawer(),
-          body: viewModel != null
-              ? viewModel.isLoading
-                  ? SplashScreen()
-                  : Stack(
-                      children: [
-                        if (viewModel.useAnimatedBackgrounds)
-                          WeatherBg(
-                            width: _sw,
-                            height: _sh,
-                            weatherType:
-                                viewModel.weatherType(viewModel.conditionsCode),
-                          ),
-                        SafeArea(
-                          child: Stack(
-                            children: [
-                              SingleChildScrollView(
-                                child: Container(
-                                  width: _sw,
-                                  height: _sh,
-                                  child: Column(
-                                    children: _buildWeatherDetails(viewModel),
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _buildSettingsButton(viewModel),
-                                  if (viewModel.isActiveWeatherAlerts)
-                                    _buildWeatherAlertChip(viewModel),
-                                  _buildRefreshButton(viewModel),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-              : SplashScreen(),
-        );
-      },
-    );
+        distinct: true,
+        converter: (Store<GlobalAppState> store) =>
+            HomeScreenViewModel.create(store),
+        onInit: _onInit,
+        builder: (BuildContext context, HomeScreenViewModel viewModel) {
+          return Scaffold(
+              key: _scaffoldKey,
+              backgroundColor: _getBgColor(viewModel),
+              drawer: FancyDrawer(),
+              body: viewModel != null
+                  ? viewModel.isLoading
+                      ? SplashScreen()
+                      : Stack(children: [
+                          if (viewModel.useAnimatedBackgrounds)
+                            WeatherBg(
+                                width: _sw,
+                                height: _sh,
+                                weatherType: viewModel
+                                    .weatherType(viewModel.conditionsCode)),
+                          _buildBodyContent(viewModel, _sw),
+                        ])
+                  : SplashScreen());
+        });
   }
 }
