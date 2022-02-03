@@ -26,6 +26,8 @@ List<Middleware<GlobalAppState>> buildGlobalAppStateMiddleware({
         Settings.handleChangeWindSpeedUnitsRequest()),
     TypedMiddleware<GlobalAppState, ChangeAirPressureUnitsAction>(
         Settings.handleChangeAirPressureUnitsRequest()),
+    TypedMiddleware<GlobalAppState, ChangeAQIUnitsAction>(
+        Settings.handleChangeAQIUnitsRequest()),
     TypedMiddleware<GlobalAppState, LoadLocalDataAction>(
         LocalIO.handleLoadLocalDataRequest()),
     TypedMiddleware<GlobalAppState, SaveLocalDataAction>(
