@@ -32,6 +32,8 @@ dependencies:
   syncfusion_flutter_core: ^19.4.47
   syncfusion_flutter_charts: ^19.4.47
   syncfusion_flutter_gauges: ^19.4.38
+  # google_places_flutter: ^2.0.5
+  flutter_google_places: ^0.3.0
   
   # provider: ^6.0.1
   # shared_preferences: ^2.0.11
