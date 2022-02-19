@@ -1,15 +1,17 @@
-const String _weatherApiKey = '8555ce64325240e9a71211345211206';
+import 'keys.dart';
+
 Uri _weatherApiUrl = Uri.parse('http://api.weatherapi.com');
-// const String _openWeatherMapKey = '';
+
 // Uri _openWeatherMapUrl = Uri.parse('');
 
 class Config {
-// TODO: Change these to switch weather data providers
   Uri _apiUrl = _weatherApiUrl;
-  String _apiKey = _weatherApiKey;
+  String _apiKey = Keys.weatherApiKey;
+  String _gApiKey = Keys.googleApiKey;
 
   Uri get apiUrl => _apiUrl;
   String get apiKey => _apiKey;
+  String get gApiKey => _gApiKey;
 
   static Config _configState;
 
@@ -29,4 +31,8 @@ Uri getAPIUrl() {
 
 String getAPIKey() {
   return Config().apiKey;
+}
+
+String getGoogleKey() {
+  return Config().gApiKey;
 }
