@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 /// Global App theme
 /// Holds colors and styles
 
+const double cardMargin = 24;
+
 const Color textColorLightMode = darkGrey;
 const Color textColorDarkMode = white;
 
@@ -30,11 +32,11 @@ const TextStyle drawerSubtitleTextStyle = TextStyle(
 );
 const TextStyle settingsButtonStyle = TextStyle(
   fontSize: 18,
-  fontFamily: 'CarroisSC',
+  fontFamily: 'AlegreyaSC',
 );
 const TextStyle cardHeaderStyle = TextStyle(
   fontSize: 18,
-  // fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.bold,
   fontFamily: 'AlegreyaSC',
 );
 const TextStyle cardBodyStyle = TextStyle(
