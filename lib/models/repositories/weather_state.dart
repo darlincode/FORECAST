@@ -1,9 +1,11 @@
 import 'package:fancy_weather/models/models.dart';
 import 'package:flutter/material.dart';
 
-/// Weather data repository
-/// Holds state for current conditions, daily and hourly forecast,
-/// astrological data, and weather alerts
+/**
+ * Weather data repository
+ * Holds state for current conditions, daily and hourly forecast,
+ * astrological data, and weather alerts
+ */
 @immutable
 class WeatherStateRepository extends Entity<WeatherStateRepository> {
   final APILocation location;
