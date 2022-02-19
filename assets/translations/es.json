@@ -101,9 +101,12 @@
         "titles": {
             "humidity": "Humedad",
             "uv-index": "Índice UV",
-            "wind-conditions": "Viento",
+            "wind-speed": "Viento Speed",
+            "wind-direction": "Viento Direcion",
             "sunset": "Sunset",
-            "moon-phase": "Moon Phase"
+            "moon-phase": "Moon Phase",
+            "air-quality": "Air Quality Index",
+            "air-pressure": "Air Pressure"
         }
     }
 }

@@ -101,9 +101,12 @@
         "titles": {
             "humidity": "Humidity",
             "uv-index": "UV Index",
-            "wind-conditions": "Wind",
+            "wind-speed": "Wind Speed",
+            "wind-direction": "Direction",
             "sunset": "Sunrise and Sunset",
-            "moon-phase": "Moon Phase"
+            "moon-phase": "Moon Phase",
+            "air-quality": "Air Quality Index",
+            "air-pressure": "Air Pressure"
         }
     }
 }
