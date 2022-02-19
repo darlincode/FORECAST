@@ -2,7 +2,6 @@
 
 SaveLocalDataAction() - Saves locationList, user settings, but NOT weatherDataList
 
-
 ## Handling app launch
 
 ### When App is launched offline
@@ -37,13 +36,13 @@ UpdateWeatherDataReducer(weatherDataList)
 
 ## Handling Locations
 There are two lists: 
- - *locationList* holds the coords and uuid for each **SimpleLocation**
- - *weatherDataList* holds the **WeatherStateRepository** for each loc in locationList
+ - `locationList` holds the coords and uuid for each `SimpleLocation`
+ - `weatherDataList` holds the `WeatherStateRepository` for each loc in locationList
 
 
 ### Add a location to list
 Search for location with name --> 
-**LOCATION SELECTED** -->
+*LOCATION SELECTED* -->
 AddCoordsToLocationListAction() --> 
 SaveLocalDataAction() --> 
 FetchWeatherDataAction(newCoords) --> 
@@ -87,9 +86,13 @@ UpdateWeatherDataReducer(weatherDataList)
 
 ## Handling user settings
 
+### User toggles dark mode
+Click toggle dark mode buttons -->  
+ToggleDarkModeAction() -->          *Action*
+handleToggleDarkModeRequest() -->   *Middleware*
+UpdateUserSettingsAction() -->      *Action*
+_setUserSettingsReducer()           *Reducer*
 ### User updates units
 Click on new unit -->
 Set[type]UnitsAction([UnitType.enum]) -->
 UpdateSettingsReducer()
-
-### User toggles dark mode
