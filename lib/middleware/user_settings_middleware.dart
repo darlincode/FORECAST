@@ -5,35 +5,23 @@ import 'package:redux/redux.dart';
 Middleware<GlobalAppState> handleToggleAnimatedBackgroundsRequest() {
   return TypedMiddleware<GlobalAppState, ToggleAnimatedBackgroundsAction>(
       (store, action, next) {
-    store.dispatch(
-      UpdateUserSettingsAction(
-        store.state.userSettings.copyWith(
-          useAnimatedBackgrounds:
-              !store.state.userSettings.useAnimatedBackgrounds,
-        ),
-      ),
-    );
+    store.dispatch(UpdateUserSettingsAction(store.state.userSettings.copyWith(
+        useAnimatedBackgrounds:
+            !store.state.userSettings.useAnimatedBackgrounds)));
   });
 }
 
 Middleware<GlobalAppState> handleToggleDarkModeRequest() {
   return TypedMiddleware<GlobalAppState, ToggleDarkModeAction>(
-      (Store<GlobalAppState> store, ToggleDarkModeAction action,
-          NextDispatcher next) {
-    store.dispatch(
-      UpdateUserSettingsAction(
-        store.state.userSettings.copyWith(
-          useDarkMode: !store.state.userSettings.useDarkMode,
-        ),
-      ),
-    );
+      (store, action, next) {
+    store.dispatch(UpdateUserSettingsAction(store.state.userSettings
+        .copyWith(useDarkMode: !store.state.userSettings.useDarkMode)));
   });
 }
 
 Middleware<GlobalAppState> handleChangeTempUnitRequest() {
   return TypedMiddleware<GlobalAppState, ChangeTempUnitsAction>(
-      (Store<GlobalAppState> store, ChangeTempUnitsAction action,
-          NextDispatcher next) {
+      (store, action, next) {
     store.dispatch(UpdateUserSettingsAction(
         store.state.userSettings.copyWith(tempUnits: action.tempUnits)));
   });
@@ -41,8 +29,7 @@ Middleware<GlobalAppState> handleChangeTempUnitRequest() {
 
 Middleware<GlobalAppState> handleChangeWindSpeedUnitsRequest() {
   return TypedMiddleware<GlobalAppState, ChangeWindSpeedUnitsAction>(
-      (Store<GlobalAppState> store, ChangeWindSpeedUnitsAction action,
-          NextDispatcher next) {
+      (store, action, next) {
     store.dispatch(UpdateUserSettingsAction(store.state.userSettings
         .copyWith(windSpeedUnits: action.windSpeedUnits)));
   });
@@ -50,8 +37,7 @@ Middleware<GlobalAppState> handleChangeWindSpeedUnitsRequest() {
 
 Middleware<GlobalAppState> handleChangeAirPressureUnitsRequest() {
   return TypedMiddleware<GlobalAppState, ChangeAirPressureUnitsAction>(
-      (Store<GlobalAppState> store, ChangeAirPressureUnitsAction action,
-          NextDispatcher next) {
+      (store, action, next) {
     store.dispatch(UpdateUserSettingsAction(store.state.userSettings
         .copyWith(airPressureUnits: action.airPressureUnits)));
     //
@@ -60,8 +46,7 @@ Middleware<GlobalAppState> handleChangeAirPressureUnitsRequest() {
 
 Middleware<GlobalAppState> handleChangeAQIUnitsRequest() {
   return TypedMiddleware<GlobalAppState, ChangeAQIUnitsAction>(
-      (Store<GlobalAppState> store, ChangeAQIUnitsAction action,
-          NextDispatcher next) {
+      (store, action, next) {
     store.dispatch(UpdateUserSettingsAction(
         store.state.userSettings.copyWith(aqiUnits: action.aqiUnits)));
   });
