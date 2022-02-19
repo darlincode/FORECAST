@@ -91,11 +91,6 @@ class ForecastApp extends StatelessWidget {
           fontFamily: 'Lato',
         ),
         home: HomeScreen(),
-        // StoreBuilder<GlobalAppState>(
-        //   // onInit: onInit,
-        //   builder: (BuildContext context, Store<GlobalAppState> store) =>
-        //       HomeScreen(),
-        // ),
       ),
     );
   }
