@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_weather_bg/bg/weather_bg.dart';
 import 'package:flutter_weather_bg/flutter_weather_bg.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:redux/redux.dart';
 
 @immutable
@@ -20,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   void _onInit(Store<GlobalAppState> store) {
     store.dispatch(LoadLocalDataAction());
@@ -75,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Build body panels
-  List<Widget> _buildWeatherDetails(viewModel) {
+  List<Widget> _buildWeatherDetails(HomeScreenViewModel viewModel) {
     return [
       const SizedBox(height: 48),
       const TemperatureCard(),
@@ -84,15 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
       _fancyDivider(viewModel),
       const WindConditionsCard(),
       _fancyDivider(viewModel),
-      //   AQICard(),
-      //   AirPressureCard(),
-      AstroDataCard(),
+      if (viewModel.activeIndex == 0) AstroDataCard(),
+      if (viewModel.activeIndex == 0) _fancyDivider(viewModel),
+      const AQIAirPressureCard(),
       _fancyDivider(viewModel),
       // HourlyForecastPanel(),
       // DailyForecastPanel(),
-      // ConditionsPanel(),
-      // WindConditionsPanel(),
-      // AirQualityPanel(),
     ];
   }
 
@@ -106,13 +106,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ]);
   }
 
-  Widget _buildBodyContent(viewModel, _sw) {
+  Widget _buildBodyContent(HomeScreenViewModel viewModel) {
+    final double _sw = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Stack(children: [
-      SingleChildScrollView(
-          child: Container(
-              width: _sw,
-              child: Column(children: _buildWeatherDetails(viewModel)))),
+      SmartRefresher(
+        onRefresh: () {
+          viewModel.dispatch(LoadLocalDataAction());
+          _refreshController.refreshCompleted();
+        },
+        controller: _refreshController,
+        enablePullDown: true,
+        enablePullUp: false,
+        header: MaterialClassicHeader(
+          backgroundColor: viewModel.panelColor,
+        ),
+        child: SingleChildScrollView(
+            child: Container(
+                width: _sw,
+                child: Column(children: _buildWeatherDetails(viewModel)))),
+      ),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         _buildSettingsButton(viewModel),
         if (viewModel.isActiveWeatherAlerts) _buildWeatherAlertChip(viewModel),
@@ -121,11 +134,58 @@ class _HomeScreenState extends State<HomeScreen> {
     ]));
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildWeatherBackground(HomeScreenViewModel viewModel) {
+    final double _sw = MediaQuery.of(context).size.width;
+    final double _sh = MediaQuery.of(context).size.height;
+    return WeatherBg(
+        width: _sw,
+        height: _sh,
+        weatherType: viewModel.weatherType(viewModel.conditionsCode));
+  }
+
+  Widget _buildLoadingOverlay(HomeScreenViewModel viewModel) {
     final double _sw = MediaQuery.of(context).size.width;
     final double _sh = MediaQuery.of(context).size.height;
 
+    return Stack(
+      children: [
+        Container(
+          height: _sh,
+          width: _sw,
+          color: viewModel.panelColor.withOpacity(0.6),
+        ),
+        Center(
+          child: Container(
+            height: 150,
+            width: 250,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: viewModel.panelColor,
+                border: Border.all(color: green, width: 2)),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // const SizedBox(height: 8),
+                  CircularProgressIndicator(),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Fetching latest weather data...',
+                    textAlign: TextAlign.center,
+                    style: viewModel.fetchingDataStyle,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return StoreConnector<GlobalAppState, HomeScreenViewModel>(
         distinct: true,
         converter: (Store<GlobalAppState> store) =>
@@ -136,19 +196,14 @@ class _HomeScreenState extends State<HomeScreen> {
               key: _scaffoldKey,
               backgroundColor: _getBgColor(viewModel),
               drawer: FancyDrawer(),
-              body: viewModel != null
-                  ? viewModel.isLoading
-                      ? SplashScreen()
-                      : Stack(children: [
-                          if (viewModel.useAnimatedBackgrounds)
-                            WeatherBg(
-                                width: _sw,
-                                height: _sh,
-                                weatherType: viewModel
-                                    .weatherType(viewModel.conditionsCode)),
-                          _buildBodyContent(viewModel, _sw),
-                        ])
-                  : SplashScreen());
+              body: viewModel == null
+                  ? SplashScreen()
+                  : Stack(children: [
+                      if (viewModel.useAnimatedBackgrounds)
+                        _buildWeatherBackground(viewModel),
+                      _buildBodyContent(viewModel),
+                      if (viewModel.isLoading) _buildLoadingOverlay(viewModel)
+                    ]));
         });
   }
 }
