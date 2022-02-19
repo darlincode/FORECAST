@@ -56,3 +56,8 @@ The following packages were used to create this project:
 - shared_preferences
 - flutter_weather_bg
 - easy_localization
+
+## Project Structure
+root
+|
+|__
