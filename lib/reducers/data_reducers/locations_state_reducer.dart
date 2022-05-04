@@ -12,6 +12,7 @@ int _setActiveLocationReducer(int state, SetActiveLocationIndexAction action) {
   return action.index;
 }
 
+// ignore: missing_return
 List<SimpleLocation> locationListReducer(List<SimpleLocation> state, action) {
   if (action is AddCoordsToLocationListAction) {
     return List.unmodifiable(

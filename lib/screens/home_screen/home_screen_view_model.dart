@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'dart:developer';
 
 import 'package:fancy_weather/actions/actions.dart';
@@ -140,4 +141,10 @@ class HomeScreenViewModel {
       weatherType: (code) => _weatherType(code),
     );
   }
+
+  get activeIndex => null;
+
+  get fetchingDataStyle => null;
+
+  void dispatch(LoadLocalDataAction loadLocalDataAction) {}
 }

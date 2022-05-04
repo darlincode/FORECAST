@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'keys.dart';
 
 Uri _weatherApiUrl = Uri.parse('http://api.weatherapi.com');
@@ -23,6 +24,12 @@ class Config {
     }
     return Config._configState;
   }
+}
+
+class Keys {
+  static String weatherApiKey;
+
+  static String googleApiKey;
 }
 
 Uri getAPIUrl() {

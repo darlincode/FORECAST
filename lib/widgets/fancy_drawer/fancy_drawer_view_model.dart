@@ -56,6 +56,7 @@ class FancyDrawerViewModel {
   });
 
   factory FancyDrawerViewModel.create(Store<GlobalAppState> store) {
+    // ignore: unused_element
     int _getActiveLocationIndex() {
       return store.state.activeLocationIndex ?? 0;
     }

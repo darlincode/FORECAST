@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:fancy_weather/state.dart';
 import 'package:fancy_weather/theme.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:intl/intl.dart';
 import 'package:redux/redux.dart';
 
@@ -35,6 +36,7 @@ class AstroDataCardViewModel {
       @required this.useDarkMode});
 
   factory AstroDataCardViewModel.create(Store<GlobalAppState> store) {
+    // ignore: unused_element
     int _getActiveLocationIndex() {
       return store.state.activeLocationIndex ?? 0;
     }

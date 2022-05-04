@@ -6,7 +6,7 @@ import 'package:fancy_weather/utilities/forecast_icons.dart';
 import 'package:fancy_weather/widgets/fancy_drawer/fancy_drawer_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 import 'package:redux/redux.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -20,6 +20,8 @@ class FancyDrawer extends StatefulWidget {
 
 class _FancyDrawerState extends State<FancyDrawer> {
   final TextEditingController _locationController = TextEditingController();
+
+  var SvgPicture;
 
   /// Settings Section
   Widget _buildSettingsSection(FancyDrawerViewModel viewModel) {
@@ -186,6 +188,7 @@ class _FancyDrawerState extends State<FancyDrawer> {
         shrinkWrap: true,
         itemCount: viewModel.locationList.length,
         itemBuilder: (ctx, i) {
+          // ignore: todo
           //TODO: Make the listTile fancier with dynamic background
           return ListTile(
               title: Text(
@@ -274,6 +277,7 @@ class _FancyDrawerState extends State<FancyDrawer> {
         title: Column(children: [
       Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
+        // ignore: todo
         child: Text(tr('settings.temp_units'), // TODO: Add translation
             style: TextStyle(color: viewModel.textColor)),
       ),

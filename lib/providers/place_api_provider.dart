@@ -67,3 +67,7 @@ class PlaceApiProvider {
     }
   }
 }
+
+class Suggestion {
+  Suggestion(p, p2, p3);
+}

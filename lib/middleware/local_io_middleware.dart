@@ -8,6 +8,7 @@ Middleware<GlobalAppState> handleLoadLocalDataRequest() {
     bool foundData = false;
 
     try {
+      // ignore: todo
       // TODO: load to local data here
       if (foundData) {
         /// we found data!  load that shiz.
