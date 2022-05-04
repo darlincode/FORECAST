@@ -10,7 +10,7 @@ class Routes {
   static const locations_screen = '/locations';
 
   static const settings_title = 'Settings';
-  static const locations_title = 'Locations';
+  static const locations_title = 'Locations'; 
 
   static MaterialPageRoute buildRoute(RouteSettings settings, Widget builder) {
     return MaterialPageRoute(

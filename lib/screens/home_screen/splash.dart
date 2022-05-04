@@ -29,13 +29,13 @@ class SplashScreen extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             Text(
-              tr('loading'),
+              tr('Loading'),
               style: vm.loadingTextStyle,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 15),
             const SizedBox(
-                height: 48,
-                width: 48,
+                height: 47,
+                width: 47,
                 child: Center(child: CircularProgressIndicator()))
           ])),
         );
